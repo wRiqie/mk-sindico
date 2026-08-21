@@ -4,9 +4,11 @@ import "./globals.css";
 
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-display", display: "swap" });
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-body", display: "swap" });
+const deploymentHost = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL ?? "mksindico.com.br";
+const siteUrl = deploymentHost.startsWith("http") ? deploymentHost : `https://${deploymentHost}`;
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mksindico.com.br"),
+  metadataBase: new URL(siteUrl),
   title: { default: "MK Síndico Profissional | Gestão Condominial com Método", template: "%s | MK Síndico Profissional" },
   description: "Síndico profissional e gestão condominial com experiência executiva, governança e método para mais controle, previsibilidade e valorização do patrimônio.",
   keywords: ["síndico profissional", "gestão condominial", "governança condominial", "consultoria condominial", "São Paulo"],
@@ -18,13 +20,13 @@ export const metadata: Metadata = {
     siteName: "MK Síndico Profissional",
     type: "website",
     locale: "pt_BR",
-    images: [{ url: "/opengraph.webp", width: 1200, height: 630, alt: "MK Síndico Profissional — Gestão Condominial com Método", type: "image/webp" }],
+    images: [{ url: "/opengraph.jpg", width: 1200, height: 630, alt: "MK Síndico Profissional — Gestão Condominial com Método", type: "image/jpeg" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "MK Síndico Profissional | Gestão Condominial com Método",
     description: "Gestão condominial não deve ser improviso. Deve ser método.",
-    images: ["/opengraph.webp"],
+    images: ["/opengraph.jpg"],
   },
   robots: { index: true, follow: true },
 };
