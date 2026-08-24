@@ -255,7 +255,7 @@ export default function Home() {
           <a href="#metodo-mk">Método MK</a>
           <a href="/diagnostico">Diagnóstico</a>
           <a href="#sobre">Marcos Kowalewski</a>
-          <a href="#conteudo">Conteúdo</a>
+          <Link href="/blog">Conteúdo</Link>
           <a href="#sobre">Sobre a MK</a>
           <a href="#contato">Contato</a>
         </nav>
@@ -498,9 +498,6 @@ export default function Home() {
               <br />
               necessidades do condomínio.
             </h2>
-            <a href="#solucoes">
-              Ver todas as soluções <Arrow />
-            </a>
           </div>
           <div className="solution-grid">
             {services.map(([title, copy], i) => (
@@ -528,9 +525,6 @@ export default function Home() {
               <br />
               Condomínios que confiam na MK.
             </h2>
-            <a href="#">
-              Ver todos os cases <Arrow />
-            </a>
           </div>
           <div className="case-grid">
             {cases.map(([title, scenario, result]) => (
@@ -663,9 +657,9 @@ export default function Home() {
             ))}
           </div>
           <div className="knowledge-action">
-            <a className="button" href="#conteudo">
+            <Link className="button" href="/blog">
               Ver todos os conteúdos <Arrow />
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -728,11 +722,19 @@ export default function Home() {
           </div>
           <div>
             <h3>Soluções</h3>
-            <Link href="/solucoes/sindico-profissional">Síndico Profissional</Link>
+            <Link href="/solucoes/sindico-profissional">
+              Síndico Profissional
+            </Link>
             <a href="#solucoes">Gestão Condominial</a>
-            <Link href="/solucoes/consultoria-condominial">Consultoria Condominial</Link>
-            <Link href="/solucoes/implantacao-condominial">Implantação Condominial</Link>
-            <Link href="/solucoes/conselheiro-profissional">Conselheiro Profissional</Link>
+            <Link href="/solucoes/consultoria-condominial">
+              Consultoria Condominial
+            </Link>
+            <Link href="/solucoes/implantacao-condominial">
+              Implantação Condominial
+            </Link>
+            <Link href="/solucoes/conselheiro-profissional">
+              Conselheiro Profissional
+            </Link>
           </div>
           <div>
             <h3>Gestão</h3>
@@ -747,7 +749,7 @@ export default function Home() {
             <a href="#sobre">Sobre a MK</a>
             <a href="#sobre">Marcos Kowalewski</a>
             <a href="#metodo">Método MK</a>
-            <a href="#conteudo">Cases e Experiências</a>
+            <Link href="/blog">Cases e Experiências</Link>
             <a href="/diagnostico">Diagnóstico</a>
           </div>
           <div>
@@ -758,9 +760,9 @@ export default function Home() {
           </div>
           <div>
             <h3>Institucional</h3>
-            <a href="#">Política de Privacidade</a>
-            <a href="#">Termos de Uso</a>
-            <a href="#">LGPD</a>
+            <Link href="/politica-de-privacidade">Política de Privacidade</Link>
+            <Link href="/termos-de-uso">Termos de Uso</Link>
+            <Link href="/lgpd">LGPD</Link>
           </div>
         </div>
         <div className="wrap copyright">
