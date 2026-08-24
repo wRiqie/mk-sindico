@@ -11,6 +11,7 @@ import {
   UsersRound,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const problems = [
   [
@@ -132,6 +133,12 @@ const services = [
     "Conselheiro profissional",
     "Apoio técnico e independente para fortalecer a governança e auxiliar o Conselho na tomada de decisões.",
   ],
+];
+const serviceSlugs = [
+  "sindico-profissional",
+  "consultoria-condominial",
+  "implantacao-condominial",
+  "conselheiro-profissional",
 ];
 const cases = [
   [
@@ -504,9 +511,9 @@ export default function Home() {
                 <div>
                   <h3>{title}</h3>
                   <p>{copy}</p>
-                  <a href="#contato">
+                  <Link href={`/solucoes/${serviceSlugs[i]}`}>
                     Saiba mais <Arrow />
-                  </a>
+                  </Link>
                 </div>
               </article>
             ))}
@@ -721,11 +728,11 @@ export default function Home() {
           </div>
           <div>
             <h3>Soluções</h3>
-            <a href="#solucoes">Síndico Profissional</a>
+            <Link href="/solucoes/sindico-profissional">Síndico Profissional</Link>
             <a href="#solucoes">Gestão Condominial</a>
-            <a href="#solucoes">Consultoria Condominial</a>
-            <a href="#solucoes">Implantação Condominial</a>
-            <a href="#solucoes">Conselheiro Profissional</a>
+            <Link href="/solucoes/consultoria-condominial">Consultoria Condominial</Link>
+            <Link href="/solucoes/implantacao-condominial">Implantação Condominial</Link>
+            <Link href="/solucoes/conselheiro-profissional">Conselheiro Profissional</Link>
           </div>
           <div>
             <h3>Gestão</h3>

@@ -1232,3 +1232,31 @@ footer {
 .copyright {
   font-size: 11px;
 }
+
+/* Páginas de soluções */
+.solution-page { min-height: 100vh; background: #fff; }
+.solution-header {
+  display: flex;
+  height: 76px;
+  align-items: center;
+  padding: 0 max(24px, calc((100% - 1180px) / 2));
+  background: #001226;
+  color: #fff;
+}
+.solution-header img { display: block; width: 145px; height: auto; }
+.solution-header nav { display: flex; align-items: center; gap: 28px; margin-left: auto; font: 650 11px var(--font-display); }
+.solution-header-cta { padding: 11px 15px; border: 1px solid #438ff1; color: #65b2ff; text-transform: uppercase; }
+.solution-hero { position: relative; overflow: hidden; padding: 72px 0 65px; color: #fff; background: linear-gradient(120deg, #001226 0%, #00264d 72%, #064b8d 100%); }
+.solution-hero::after { content: "MK"; position: absolute; right: -28px; bottom: -125px; color: rgba(255,255,255,.035); font: 850 310px/1 var(--font-display); letter-spacing: -.13em; pointer-events: none; }
+.solution-hero-grid { display: grid; grid-template-columns: 1fr 310px; gap: 80px; align-items: end; position: relative; z-index: 1; }
+.solution-eyebrow,.solution-label { color: #168eff; font: 750 11px var(--font-display); letter-spacing: .08em; text-transform: uppercase; }
+.solution-hero h1 { max-width: 770px; margin: 13px 0 18px; font: 750 clamp(36px,4.2vw,58px)/1.06 var(--font-display); letter-spacing: -.045em; }
+.solution-hero-grid>div>p { max-width: 700px; margin: 0; color: #d7e2ee; font-size: 15px; line-height: 1.7; }
+.solution-hero aside { padding: 24px; border: 1px solid rgba(91,164,234,.38); background: rgba(0,15,33,.48); backdrop-filter: blur(5px); }
+.solution-hero aside svg { color: #168eff; }.solution-hero aside strong{display:block;margin:12px 0 6px;font:700 14px var(--font-display);text-transform:uppercase}.solution-hero aside p{margin:0;color:#c9d6e3;font-size:12px;line-height:1.6}
+.solution-content { display:grid;grid-template-columns:1.35fr .65fr;gap:70px;padding-top:58px;padding-bottom:58px;align-items:start }
+.solution-content h2,.solution-results h2,.solution-bottom h2{margin:9px 0 0;font:750 26px/1.2 var(--font-display);letter-spacing:-.025em}.scope-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:24px}.scope-list>div{display:flex;gap:10px;align-items:flex-start;padding:15px;border:1px solid var(--line);background:var(--mist);font-size:12px}.scope-list svg{flex:0 0 auto;color:var(--blue)}
+.solution-fit{padding:25px;border-top:3px solid var(--blue);background:#001b37;color:#fff}.solution-fit>svg{color:#168eff;margin-bottom:15px}.solution-fit p{margin:12px 0 0;color:#d7e1ec;font-size:13px;line-height:1.65}
+.solution-results{padding:48px 0;background:var(--mist);border-block:1px solid #e3eaf2}.solution-results .wrap>div{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:25px}.solution-results article{display:flex;align-items:center;gap:17px;padding:18px;background:#fff;border:1px solid var(--line)}.solution-results article b{color:var(--blue);font:750 18px var(--font-display)}.solution-results article p{margin:0;font:650 12px/1.4 var(--font-display)}
+.solution-bottom{padding:44px 0;background:#fff}.solution-bottom>.wrap{display:flex;align-items:center;justify-content:space-between;gap:40px}.solution-bottom p{margin:9px 0 0;color:var(--muted);font-size:13px}.solution-bottom .button{min-width:235px}.solution-footer{padding:25px 0;background:#001226;color:#b9c9d9}.solution-footer>.wrap{display:flex;align-items:center;gap:24px}.solution-footer img{width:125px;height:auto}.solution-footer p{margin:0;font-size:11px}.solution-footer a{margin-left:auto;color:#62b1ff;font:650 10px var(--font-display);text-transform:uppercase}
+@media(max-width:760px){.solution-header{height:68px;padding:0 16px}.solution-header nav a:not(.solution-header-cta){display:none}.solution-header-cta{font-size:9px}.solution-hero{padding:48px 0}.solution-hero-grid{grid-template-columns:1fr;gap:30px}.solution-hero h1{font-size:34px}.solution-content{grid-template-columns:1fr;gap:28px;padding-top:40px;padding-bottom:40px}.scope-list{grid-template-columns:1fr}.solution-results .wrap>div{grid-template-columns:1fr}.solution-bottom>.wrap{display:block}.solution-bottom .button{width:100%;margin-top:24px}.solution-footer>.wrap{align-items:flex-start;flex-wrap:wrap}.solution-footer p{width:100%;order:3}.solution-footer a{margin-left:auto}}
