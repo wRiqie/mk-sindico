@@ -1,11 +1,20 @@
+import { timingSafeEqual } from "node:crypto";
 import {
   apiError,
   BLOG_POST_SUMMARY_COLUMNS,
   BlogPostRow,
   normalizeCategorySlug,
+  sanitizeBlogHtml,
+  toBlogPostDetail,
   toBlogPostSummary,
 } from "@/lib/blog";
-import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { BlogInputError, parseBlogPostInput } from "@/lib/blog-input";
+import {
+  getSupabaseAdminClient,
+  getSupabaseServerClient,
+} from "@/lib/supabase/server";
+
+export const runtime = "nodejs";
 
 const DEFAULT_PAGE_SIZE = 10;
 const MAX_PAGE_SIZE = 50;
@@ -138,6 +147,132 @@ export async function GET(request: Request) {
     });
   } catch (error) {
     console.error("Failed to initialize blog post listing", error);
+    return apiError(500, "BLOG_UNAVAILABLE", "Blog service is unavailable.");
+  }
+}
+
+function hasValidApiKey(request: Request) {
+  const expectedKey = process.env.N8N_BLOG_API_KEY;
+  const authorization = request.headers.get("authorization");
+
+  if (!expectedKey || !authorization?.startsWith("Bearer ")) {
+    return false;
+  }
+
+  const receivedKey = authorization.slice("Bearer ".length);
+  const expectedBuffer = Buffer.from(expectedKey);
+  const receivedBuffer = Buffer.from(receivedKey);
+
+  return (
+    expectedBuffer.length === receivedBuffer.length &&
+    timingSafeEqual(expectedBuffer, receivedBuffer)
+  );
+}
+
+export async function PUT(request: Request) {
+  if (!process.env.N8N_BLOG_API_KEY) {
+    console.error("N8N_BLOG_API_KEY is not configured");
+    return apiError(500, "BLOG_API_NOT_CONFIGURED", "Blog API is not configured.");
+  }
+
+  if (!hasValidApiKey(request)) {
+    return apiError(401, "UNAUTHORIZED", "A valid API key is required.");
+  }
+
+  try {
+    const body = await request.json();
+    const input = parseBlogPostInput(body);
+    const contentHtml = sanitizeBlogHtml(input.content);
+
+    if (!contentHtml.trim()) {
+      return apiError(400, "INVALID_CONTENT", "content has no allowed HTML.");
+    }
+
+    const supabase = getSupabaseAdminClient();
+    const { data: existingPost, error: existingPostError } = await supabase
+      .from("blog_posts")
+      .select("id")
+      .eq("slug", input.slug)
+      .maybeSingle();
+
+    if (existingPostError) {
+      console.error("Failed to check existing blog post", existingPostError);
+      return apiError(500, "BLOG_QUERY_FAILED", "Unable to save blog post.");
+    }
+
+    let coverImageUrl: string | undefined;
+    let coverImageAlt: string | undefined;
+
+    if (input.image) {
+      const imagePath = `${input.slug}/cover`;
+      const { error: uploadError } = await supabase.storage
+        .from("blog-images")
+        .upload(imagePath, input.image.bytes, {
+          contentType: input.image.mimeType,
+          cacheControl: "31536000",
+          upsert: true,
+        });
+
+      if (uploadError) {
+        console.error("Failed to upload blog cover image", uploadError);
+        return apiError(500, "IMAGE_UPLOAD_FAILED", "Unable to upload cover image.");
+      }
+
+      const { data: publicImage } = supabase.storage
+        .from("blog-images")
+        .getPublicUrl(imagePath);
+      coverImageUrl = `${publicImage.publicUrl}?v=${Date.now()}`;
+      coverImageAlt = input.image.alt;
+    }
+
+    const postPayload: Record<string, unknown> = {
+      title: input.title,
+      slug: input.slug,
+      excerpt: input.summary,
+      content_html: contentHtml,
+      tags: input.tags,
+      category: input.category,
+      author: input.author,
+      status: input.status,
+      seo_title: input.seoTitle,
+      seo_description: input.seoDescription,
+    };
+
+    if (input.publishedAt !== undefined) {
+      postPayload.published_at = input.publishedAt;
+    }
+    if (coverImageUrl) {
+      postPayload.cover_image_url = coverImageUrl;
+      postPayload.cover_image_alt = coverImageAlt;
+    }
+
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .upsert(postPayload as never, { onConflict: "slug" })
+      .select("*")
+      .single();
+
+    if (error) {
+      console.error("Failed to upsert blog post", error);
+      return apiError(500, "BLOG_WRITE_FAILED", "Unable to save blog post.");
+    }
+
+    return Response.json(
+      {
+        post: toBlogPostDetail(data as unknown as BlogPostRow),
+        created: !existingPost,
+      },
+      { status: existingPost ? 200 : 201 },
+    );
+  } catch (error) {
+    if (error instanceof BlogInputError) {
+      return apiError(400, "INVALID_POST", error.message);
+    }
+    if (error instanceof SyntaxError) {
+      return apiError(400, "INVALID_JSON", "Request body must contain valid JSON.");
+    }
+
+    console.error("Failed to receive blog post", error);
     return apiError(500, "BLOG_UNAVAILABLE", "Blog service is unavailable.");
   }
 }

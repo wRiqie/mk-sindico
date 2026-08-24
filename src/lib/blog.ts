@@ -10,6 +10,7 @@ export const BLOG_POST_SUMMARY_COLUMNS = [
   "cover_image_url",
   "cover_image_alt",
   "author",
+  "tags",
   "published_at",
   "seo_title",
   "seo_description",
@@ -33,6 +34,7 @@ export type BlogPostRow = {
   cover_image_url: string | null;
   cover_image_alt: string | null;
   author: string;
+  tags: string[];
   published_at: string;
   seo_title: string | null;
   seo_description: string | null;
@@ -50,6 +52,7 @@ export type BlogPostSummary = {
   coverImageUrl: string | null;
   coverImageAlt: string | null;
   author: string;
+  tags: string[];
   publishedAt: string;
   seoTitle: string | null;
   seoDescription: string | null;
@@ -72,6 +75,7 @@ export function toBlogPostSummary(row: BlogPostRow): BlogPostSummary {
     coverImageUrl: row.cover_image_url,
     coverImageAlt: row.cover_image_alt,
     author: row.author,
+    tags: row.tags,
     publishedAt: row.published_at,
     seoTitle: row.seo_title,
     seoDescription: row.seo_description,
@@ -87,7 +91,7 @@ export function toBlogPostDetail(row: BlogPostRow): BlogPostDetail {
   };
 }
 
-function sanitizeBlogHtml(html: string) {
+export function sanitizeBlogHtml(html: string) {
   return sanitizeHtml(html, {
     allowedTags: [
       "p",
