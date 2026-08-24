@@ -1,3 +1,15 @@
+import {
+  Building2,
+  CalendarDays,
+  CircleDollarSign,
+  ClipboardList,
+  Clock3,
+  FileText,
+  Settings,
+  ShieldCheck,
+  UserRound,
+  UsersRound,
+} from "lucide-react";
 import Image from "next/image";
 
 const problems = [
@@ -61,6 +73,38 @@ const pillars = [
     "Comunicação, relacionamentos e gestão de conflitos.",
   ],
 ];
+const methodSteps = [
+  [
+    "method_search.webp",
+    "Diagnosticar",
+    "Compreender o cenário atual, prioridades, riscos e pontos de atenção.",
+  ],
+  [
+    "method_path.webp",
+    "Planejar",
+    "Definir prioridades, responsabilidades, ações e cronogramas.",
+  ],
+  [
+    "method_flow.webp",
+    "Estruturar",
+    "Organizar processos, rotinas, responsabilidades e instrumentos de acompanhamento.",
+  ],
+  [
+    "method_checklist.webp",
+    "Executar",
+    "Transformar planejamento em ações coordenadas.",
+  ],
+  [
+    "method_growth.webp",
+    "Monitorar",
+    "Acompanhar prioridades, indicadores, planos de ação e evolução da gestão.",
+  ],
+  [
+    "method_trend_up.webp",
+    "Evoluir",
+    "Revisar continuamente a operação e identificar oportunidades de melhoria.",
+  ],
+];
 const credentials = [
   [
     "about_syndic.webp",
@@ -117,6 +161,46 @@ const faqs = [
   "Como o Conselho acompanha a gestão da MK?",
   "Como funciona o diagnóstico da gestão condominial?",
 ];
+const articles = [
+  {
+    category: "Gestão condominial",
+    title:
+      "Planejamento orçamentário: como construir previsibilidade e segurança para o condomínio",
+    excerpt:
+      "Entenda como um planejamento orçamentário bem estruturado reduz riscos, evita imprevistos e fortalece a saúde financeira do condomínio.",
+    date: "15 de maio de 2025",
+    time: "6 min de leitura",
+    tone: "building",
+  },
+  {
+    category: "Governança",
+    title: "Governança condominial: o papel do Conselho na boa gestão",
+    excerpt:
+      "A atuação estratégica do Conselho é essencial para garantir transparência, controle e decisões alinhadas aos interesses do condomínio.",
+    date: "08 de maio de 2025",
+    time: "5 min de leitura",
+    tone: "meeting",
+  },
+  {
+    category: "Contratos",
+    title: "Contratos bem gerenciados, resultados protegidos",
+    excerpt:
+      "Boas práticas na gestão de contratos garantem conformidade, qualidade na prestação de serviços e proteção ao patrimônio do condomínio.",
+    date: "30 de abril de 2025",
+    time: "4 min de leitura",
+    tone: "contract",
+  },
+];
+const contentCategories = [
+  { icon: UserRound, label: "Síndico Profissional" },
+  { icon: Building2, label: "Gestão Condominial" },
+  { icon: ShieldCheck, label: "Governança" },
+  { icon: UsersRound, label: "Conselho" },
+  { icon: ClipboardList, label: "Planejamento" },
+  { icon: CircleDollarSign, label: "Finanças" },
+  { icon: FileText, label: "Contratos" },
+  { icon: Settings, label: "Operação" },
+];
 const Arrow = () => <span aria-hidden="true">→</span>;
 
 export default function Home() {
@@ -161,7 +245,7 @@ export default function Home() {
         </a>
         <nav aria-label="Navegação principal">
           <a href="#solucoes">Soluções</a>
-          <a href="#metodo">Método MK</a>
+          <a href="#metodo-mk">Método MK</a>
           <a href="/diagnostico">Diagnóstico</a>
           <a href="#sobre">Marcos Kowalewski</a>
           <a href="#conteudo">Conteúdo</a>
@@ -359,6 +443,46 @@ export default function Home() {
           ))}
         </div>
       </section>
+      <section className="method-mk" id="metodo-mk">
+        <div className="wrap method-mk-intro">
+          <h2>
+            Gestão profissional
+            <br />
+            <em>começa por entender.</em>
+          </h2>
+          <p>
+            Cada condomínio possui características, prioridades e desafios
+            diferentes. Por isso, a atuação da MK parte da compreensão do
+            cenário para estruturar uma gestão adequada à realidade do
+            empreendimento.
+          </p>
+        </div>
+        <div className="wrap method-mk-scroll" aria-label="Etapas do Método MK">
+          <div className="method-mk-grid">
+            {methodSteps.map(([icon, title, copy], index) => (
+              <article className="method-card" key={title}>
+                <span className="method-number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <Image src={`/method/${icon}`} alt="" width={88} height={88} />
+                <h3>{title}</h3>
+                <span className="method-rule" aria-hidden="true" />
+                <p>{copy}</p>
+                {index < methodSteps.length - 1 && (
+                  <span className="method-arrow" aria-hidden="true">
+                    ›
+                  </span>
+                )}
+              </article>
+            ))}
+          </div>
+        </div>
+        <div className="method-mk-action">
+          <a className="button" href="#contato">
+            Conhecer o Método MK <Arrow />
+          </a>
+        </div>
+      </section>
       <section className="section solutions" id="solucoes">
         <div className="wrap">
           <div className="section-heading heading-link">
@@ -477,7 +601,68 @@ export default function Home() {
           </aside>
         </div>
       </section>
-      <section className="section faq" id="conteudo">
+      <section className="knowledge" id="conteudo">
+        <div className="wrap">
+          <div className="knowledge-heading">
+            <span aria-hidden="true" />
+            <h2>
+              Conhecimento para quem
+              <br />
+              toma <em>decisões no condomínio.</em>
+            </h2>
+            <p>
+              Conteúdos sobre sindicatura profissional, governança,
+              planejamento, finanças, contratos, operação e gestão condominial.
+            </p>
+          </div>
+          <div className="article-grid">
+            {articles.map((article) => (
+              <article className="article-card" key={article.title}>
+                <div
+                  className={`article-placeholder ${article.tone}`}
+                  aria-hidden="true"
+                >
+                  <span>MK</span>
+                </div>
+                <div className="article-copy">
+                  <span className="article-tag">{article.category}</span>
+                  <h3>{article.title}</h3>
+                  <p>{article.excerpt}</p>
+                  <div className="article-meta">
+                    <span>
+                      <CalendarDays size={14} />
+                      {article.date}
+                    </span>
+                    <i aria-hidden="true">·</i>
+                    <span>
+                      <Clock3 size={14} />
+                      {article.time}
+                    </span>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="category-heading">
+            <strong>Categorias</strong>
+            <span />
+          </div>
+          <div className="category-grid">
+            {contentCategories.map(({ icon: Icon, label }) => (
+              <a href="#conteudo" key={label}>
+                <Icon size={27} strokeWidth={1.7} />
+                <span>{label}</span>
+              </a>
+            ))}
+          </div>
+          <div className="knowledge-action">
+            <a className="button" href="#conteudo">
+              Ver todos os conteúdos <Arrow />
+            </a>
+          </div>
+        </div>
+      </section>
+      <section className="section faq">
         <div className="wrap">
           <div className="section-heading">
             <h2>Dúvidas frequentes</h2>
