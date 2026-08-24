@@ -1,45 +1,583 @@
 import Image from "next/image";
 
 const problems = [
-  ["problem_bell.webp", "Manutenções emergenciais", "Problemas identificados somente quando já exigem intervenção."],
-  ["problem_document.webp", "Contratos sem acompanhamento", "Fornecedores contratados sem indicadores claros de desempenho."],
-  ["problem_coin.webp", "Custos imprevisíveis", "Despesas que surgem sem planejamento adequado."],
-  ["problem_condominium.webp", "Obras sem planejamento", "Intervenções realizadas sem visão integrada de prioridades."],
-  ["problem_charts.webp", "Decisões sem informação", "Conselho e gestão tomando decisões com informações fragmentadas."],
-  ["problem_sync.webp", "Problemas recorrentes", "Ocorrências resolvidas pontualmente sem tratamento da causa."],
+  [
+    "problem_bell.webp",
+    "Manutenções emergenciais",
+    "Problemas identificados somente quando já exigem intervenção.",
+  ],
+  [
+    "problem_document.webp",
+    "Contratos sem acompanhamento",
+    "Fornecedores contratados sem indicadores claros de desempenho.",
+  ],
+  [
+    "problem_coin.webp",
+    "Custos imprevisíveis",
+    "Despesas que surgem sem planejamento adequado.",
+  ],
+  [
+    "problem_condominium.webp",
+    "Obras sem planejamento",
+    "Intervenções realizadas sem visão integrada de prioridades.",
+  ],
+  [
+    "problem_charts.webp",
+    "Decisões sem informação",
+    "Conselho e gestão tomando decisões com informações fragmentadas.",
+  ],
+  [
+    "problem_sync.webp",
+    "Problemas recorrentes",
+    "Ocorrências resolvidas pontualmente sem tratamento da causa.",
+  ],
 ];
-const process = [["organization_calendar.webp", "Planejar"], ["organization_gear.webp", "Executar"], ["organization_charts.webp", "Medir"], ["organization_checklist.webp", "Corrigir"], ["organization_trends.webp", "Evoluir"]];
-const pillars = [["syndic_condominium.webp", "Governança", "Transparência, responsabilidades e prestação de contas."], ["syndic_gear.webp", "Operação", "Rotinas, equipes, fornecedores, controles e execução."], ["syndic_trends.webp", "Controle", "Indicadores, planos de ação e acompanhamento de resultados."], ["syndic_people.webp", "Pessoas", "Comunicação, relacionamentos e gestão de conflitos."]];
-const credentials = [["about_syndic.webp", "+35 anos", "de experiência em gestão e liderança empresarial"], ["about_condominium.webp", "Experiência executiva", "em grandes empresas"], ["about_security.webp", "Formação em", "Governança Corporativa pelo IBGC"], ["about_people.webp", "Foco em processos,", "pessoas e resultados"]];
-const services = [["Síndico profissional", "Gestão executiva, representação e acompanhamento de operação com visão profissional e estruturada."], ["Consultoria condominial", "Diagnóstico, análise e estruturação da gestão para resolver problemas ou potencializar resultados."], ["Implantação condominial", "Estruturação da operação para condomínios em fase de implantação ou início de funcionamento."], ["Conselheiro profissional", "Apoio técnico e independente para fortalecer a governança e auxiliar o Conselho na tomada de decisões."]];
-const cases = [["Condomínio residencial — Zona Oeste · SP", "Desorganização com controles", "Redução de custos e melhorias"], ["Condomínio residencial — Alphaville · SP", "Custos elevados e pouca visibilidade", "Melhor controle e decisões baseadas em informações"], ["Condomínio comercial — Região da Paulista · SP", "Processos descontrolados e comunicação falha", "Mais eficiência operacional e melhor relacionamento"]];
-const faqs = ["O que faz um síndico profissional?", "Como funciona a contratação da MK?", "Quais tipos de condomínio a MK atende?", "Qual a diferença entre síndico profissional e administrador?", "Como funciona a troca de síndico?", "Em quais regiões a MK atua?", "Quanto custa um síndico profissional?", "Como o Conselho acompanha a gestão da MK?", "Como funciona o diagnóstico da gestão condominial?"];
+const process = [
+  ["organization_calendar.webp", "Planejar"],
+  ["organization_gear.webp", "Executar"],
+  ["organization_charts.webp", "Medir"],
+  ["organization_checklist.webp", "Corrigir"],
+  ["organization_trends.webp", "Evoluir"],
+];
+const pillars = [
+  [
+    "syndic_condominium.webp",
+    "Governança",
+    "Transparência, responsabilidades e prestação de contas.",
+  ],
+  [
+    "syndic_gear.webp",
+    "Operação",
+    "Rotinas, equipes, fornecedores, controles e execução.",
+  ],
+  [
+    "syndic_trends.webp",
+    "Controle",
+    "Indicadores, planos de ação e acompanhamento de resultados.",
+  ],
+  [
+    "syndic_people.webp",
+    "Pessoas",
+    "Comunicação, relacionamentos e gestão de conflitos.",
+  ],
+];
+const credentials = [
+  [
+    "about_syndic.webp",
+    "+35 anos",
+    "de experiência em gestão e liderança empresarial",
+  ],
+  ["about_condominium.webp", "Experiência executiva", "em grandes empresas"],
+  ["about_security.webp", "Formação em", "Governança Corporativa pelo IBGC"],
+  ["about_people.webp", "Foco em processos,", "pessoas e resultados"],
+];
+const services = [
+  [
+    "Síndico profissional",
+    "Gestão executiva, representação e acompanhamento de operação com visão profissional e estruturada.",
+  ],
+  [
+    "Consultoria condominial",
+    "Diagnóstico, análise e estruturação da gestão para resolver problemas ou potencializar resultados.",
+  ],
+  [
+    "Implantação condominial",
+    "Estruturação da operação para condomínios em fase de implantação ou início de funcionamento.",
+  ],
+  [
+    "Conselheiro profissional",
+    "Apoio técnico e independente para fortalecer a governança e auxiliar o Conselho na tomada de decisões.",
+  ],
+];
+const cases = [
+  [
+    "Condomínio residencial — Zona Oeste · SP",
+    "Desorganização com controles",
+    "Redução de custos e melhorias",
+  ],
+  [
+    "Condomínio residencial — Alphaville · SP",
+    "Custos elevados e pouca visibilidade",
+    "Melhor controle e decisões baseadas em informações",
+  ],
+  [
+    "Condomínio comercial — Região da Paulista · SP",
+    "Processos descontrolados e comunicação falha",
+    "Mais eficiência operacional e melhor relacionamento",
+  ],
+];
+const faqs = [
+  "O que faz um síndico profissional?",
+  "Como funciona a contratação da MK?",
+  "Quais tipos de condomínio a MK atende?",
+  "Qual a diferença entre síndico profissional e administrador?",
+  "Como funciona a troca de síndico?",
+  "Em quais regiões a MK atua?",
+  "Quanto custa um síndico profissional?",
+  "Como o Conselho acompanha a gestão da MK?",
+  "Como funciona o diagnóstico da gestão condominial?",
+];
 const Arrow = () => <span aria-hidden="true">→</span>;
 
 export default function Home() {
-  return <main>
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "ProfessionalService", name: "MK Síndico Profissional", url: "https://mksindico.com.br", logo: "https://mksindico.com.br/logo.webp", image: "https://mksindico.com.br/hero.webp", description: "Síndico profissional e gestão condominial com experiência executiva, governança e método.", areaServed: { "@type": "City", name: "São Paulo" }, founder: { "@type": "Person", name: "Marcos Kowalewski" }, serviceType: ["Síndico profissional", "Gestão condominial", "Consultoria condominial", "Governança condominial"] }) }} />
-    <header className="site-header">
-      <a className="brand" href="#inicio" aria-label="MK Síndico Profissional — início"><Image src="/logo.webp" alt="MK Síndico Profissional" width={170} height={57} priority /></a>
-      <nav aria-label="Navegação principal"><a href="#solucoes">Soluções</a><a href="#metodo">Método MK</a><a href="/diagnostico">Diagnóstico</a><a href="#sobre">Marcos Kowalewski</a><a href="#conteudo">Conteúdo</a><a href="#sobre">Sobre a MK</a><a href="#contato">Contato</a></nav>
-      <div className="header-actions"><a className="button button-small" href="/diagnostico">Fazer diagnóstico</a><a className="outline-small" href="#contato">◉ Falar com a MK</a></div>
-    </header>
-    <section className="hero" id="inicio"><div className="wrap hero-content"><div className="hero-copy">
-      <h1>Gestão condominial<br />não deve ser improviso.<br /><em>Deve ser método.</em></h1>
-      <p>Síndico Profissional e Gestão Condominial com experiência executiva, governança e método para mais controle, previsibilidade, segurança nas decisões e valorização do patrimônio.</p>
-      <div className="button-row"><a className="button" href="/diagnostico">Solicitar uma avaliação <Arrow /></a><a className="button button-ghost" href="/diagnostico">Fazer diagnóstico da gestão <Arrow /></a></div>
-    </div><aside className="hero-card"><span className="signature">Marcos Kowalewski</span><p>Mais de 35 anos de experiência em gestão e liderança empresarial aplicados à realidade condominial.</p><a href="#sobre">Conheça sua trajetória <Arrow /></a></aside></div>
-      <div className="hero-benefits wrap">{[["hero_gear.webp", "+35 anos de experiência executiva"], ["hero_checklist.webp", "Gestão com método e processos"], ["hero_security.webp", "Governança e transparência"], ["hero_condominium.webp", "Foco em resultados e valorização do patrimônio"]].map(([icon, text]) => <div key={icon}><Image src={`/hero/${icon}`} alt="" width={36} height={36} /><strong>{text}</strong></div>)}</div>
-    </section>
-    <section className="section problem" id="metodo"><div className="wrap section-heading split-heading"><h2>Seu condomínio está sendo administrado<br />ou apenas reagindo aos problemas?</h2><p>A gestão reativa resolve o problema de hoje.<br /><strong>Uma gestão profissional trabalha para evitar o problema de amanhã.</strong></p></div><div className="wrap problem-grid">{problems.map(([icon,title,copy]) => <article key={title}><Image src={`/problem/${icon}`} alt="" width={50} height={50}/><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
-    <section className="section organization"><div className="wrap organization-grid"><div className="section-heading"><h2>Um condomínio é uma organização.<br />E precisa ser gerido como tal.</h2><p>Patrimônio, orçamento, contratos, fornecedores, pessoas, riscos e decisões fazem parte de uma operação cada vez mais complexa.</p><p>Por isso, a MK aplica princípios de gestão e governança à realidade condominial.</p></div><div className="process-flow">{process.map(([icon,title], i) => <div className="process-step" key={title}><Image src={`/organization/${icon}`} alt="" width={58} height={58}/><b>0{i+1}</b><strong>{title}</strong>{i < 4 && <span className="flow-arrow">→</span>}</div>)}</div></div></section>
-    <section className="pillars"><div className="wrap"><div className="section-heading light"><h2>Muito além da sindicatura.<br /><em>Pilares da gestão MK.</em></h2></div><div className="pillars-grid">{pillars.map(([icon,title,copy]) => <article key={title}><Image src={`/syndic/${icon}`} alt="" width={54} height={54}/><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
-    <section className="about" id="sobre"><div className="about-image"><Image src="/sobre.webp" alt="Marcos Kowalewski, fundador da MK Síndico Profissional" fill sizes="(max-width: 700px) 100vw, 28vw"/></div><div className="about-copy"><span className="eyebrow">Quem está à frente da MK</span><h2>Marcos Kowalewski</h2><h3>Mais de 35 anos de experiência em gestão.</h3><p>O perfil profissional de Marcos registra mais de 35 anos de experiência em grandes empresas e formação no Instituto Brasileiro de Governança Corporativa — IBGC.</p><p>Sua trajetória inclui experiência executiva em gestão e desenvolvimento de processos. Foi diretor regional pelo desenvolvimento e implementação do sistema de gestão Lean Construction na HTB Engenharia e, posteriormente, sócio-diretor da MK Gestão Empresarial.</p><p>Hoje, essa experiência é aplicada à gestão condominial com método, governança, planejamento e foco em resultados sustentáveis.</p><div className="button-row"><a className="button" href="#contato">Conheça a trajetória completa <Arrow /></a><a className="button button-light" href="#">in Ver perfil no LinkedIn</a></div></div><div className="credentials">{credentials.map(([icon,title,copy]) => <div key={title}><Image src={`/about/${icon}`} alt="" width={44} height={44}/><p><strong>{title}</strong><br/>{copy}</p></div>)}</div></section>
-    <section className="section solutions" id="solucoes"><div className="wrap"><div className="section-heading heading-link"><h2>Soluções para diferentes<br />necessidades do condomínio.</h2><a href="#solucoes">Ver todas as soluções <Arrow /></a></div><div className="solution-grid">{services.map(([title,copy],i) => <article key={title} className={`service-card service-${i+1}`}><div className="service-art"><span>MK</span></div><div><h3>{title}</h3><p>{copy}</p><a href="#contato">Saiba mais <Arrow /></a></div></article>)}</div></div></section>
-    <section className="section cases"><div className="wrap"><div className="section-heading heading-link"><h2>Experiência percebida na prática.<br />Condomínios que confiam na MK.</h2><a href="#">Ver todos os cases <Arrow /></a></div><div className="case-grid">{cases.map(([title,scenario,result]) => <article key={title}><h3>{title}</h3><div className="case-body"><div><b>Cenário</b><p>{scenario}</p></div><div><b>Ação MK</b><p>Planejamento, organização e método.</p></div><div><b>Resultado</b><p>{result}</p></div></div></article>)}</div></div></section>
-    <section className="diagnostic" id="diagnostico"><div className="wrap diagnostic-grid"><div className="diagnostic-image"><Image src="/maturidade.webp" alt="Diagnóstico de maturidade da gestão condominial exibido em notebook" fill sizes="(max-width: 800px) 100vw, 34vw"/></div><div><h2>Qual é o nível de maturidade<br />da gestão do seu condomínio?</h2><p>Avalie governança, planejamento, contratos, manutenção, finanças, operação, riscos e comunicação e descubra os principais pontos que merecem atenção.</p><div className="diagnostic-benefits"><span>♢ Avaliação completa<br/>e personalizada</span><span>◷ Resultado em<br/>poucos minutos</span><span>♢ Confidencial e<br/>sem compromisso</span></div></div><aside><h3>Iniciar diagnóstico<br/>gratuito</h3><p>É rápido, simples e pode gerar insights importantes para o seu condomínio.</p><a className="button" href="/diagnostico">Iniciar agora <Arrow /></a></aside></div></section>
-    <section className="section faq" id="conteudo"><div className="wrap"><div className="section-heading"><h2>Dúvidas frequentes</h2></div><div className="faq-grid">{faqs.map((question) => <details key={question}><summary>{question}<span>+</span></summary><p>Entre em contato com a MK para receber uma orientação adequada à realidade do seu condomínio.</p></details>)}</div></div></section>
-    <section className="final-cta" id="contato"><div className="wrap cta-grid"><div><h2>O próximo problema não precisa ser<br/>o motivo para profissionalizar a gestão.</h2><p>Converse com a MK e descubra como uma gestão estruturada pode aumentar controle, previsibilidade e segurança.</p></div><a className="button" href="/diagnostico">Fazer diagnóstico da gestão</a><a className="button button-ghost" href="https://wa.me/5511999999999">Conversar com a MK ◉</a></div></section>
-    <footer><div className="wrap footer-grid"><div className="footer-brand"><Image src="/logo.webp" alt="MK Síndico Profissional" width={160} height={54}/><p>Síndico Profissional e Gestão Condominial com experiência executiva, método e governança para transformar a gestão e proteger o patrimônio do condomínio.</p><div className="socials">◎ ◉ ◉ ◉ ◉</div></div><div><h3>Soluções</h3><a href="#solucoes">Síndico Profissional</a><a href="#solucoes">Gestão Condominial</a><a href="#solucoes">Consultoria Condominial</a><a href="#solucoes">Implantação Condominial</a><a href="#solucoes">Conselheiro Profissional</a></div><div><h3>Gestão</h3><a href="#metodo">Governança Condominial</a><a href="#metodo">Planejamento</a><a href="#metodo">Gestão Financeira</a><a href="#metodo">Gestão de Contratos</a><a href="#metodo">Gestão Operacional</a></div><div><h3>Conheça a MK</h3><a href="#sobre">Sobre a MK</a><a href="#sobre">Marcos Kowalewski</a><a href="#metodo">Método MK</a><a href="#conteudo">Cases e Experiências</a><a href="/diagnostico">Diagnóstico</a></div><div><h3>Atendimento</h3><p>◉ São Paulo · SP</p><p>◉ (11) 99999-9999</p><p>✉ contato@mksindico.com.br</p></div><div><h3>Institucional</h3><a href="#">Política de Privacidade</a><a href="#">Termos de Uso</a><a href="#">LGPD</a></div></div><div className="wrap copyright"><span>© 2026 MK Síndico Profissional. Todos os direitos reservados.</span><span>Desenvolvido com estratégia, método e gestão.</span></div></footer>
-  </main>;
+  return (
+    <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            name: "MK Síndico Profissional",
+            url: "https://mksindico.com.br",
+            logo: "https://mksindico.com.br/logo.webp",
+            image: "https://mksindico.com.br/hero.webp",
+            description:
+              "Síndico profissional e gestão condominial com experiência executiva, governança e método.",
+            areaServed: { "@type": "City", name: "São Paulo" },
+            founder: { "@type": "Person", name: "Marcos Kowalewski" },
+            serviceType: [
+              "Síndico profissional",
+              "Gestão condominial",
+              "Consultoria condominial",
+              "Governança condominial",
+            ],
+          }),
+        }}
+      />
+      <header className="site-header">
+        <a
+          className="brand"
+          href="#inicio"
+          aria-label="MK Síndico Profissional — início"
+        >
+          <Image
+            src="/logo.webp"
+            alt="MK Síndico Profissional"
+            width={170}
+            height={57}
+            priority
+          />
+        </a>
+        <nav aria-label="Navegação principal">
+          <a href="#solucoes">Soluções</a>
+          <a href="#metodo">Método MK</a>
+          <a href="/diagnostico">Diagnóstico</a>
+          <a href="#sobre">Marcos Kowalewski</a>
+          <a href="#conteudo">Conteúdo</a>
+          <a href="#sobre">Sobre a MK</a>
+          <a href="#contato">Contato</a>
+        </nav>
+        <div className="header-actions">
+          <a className="button button-small" href="/diagnostico">
+            Fazer diagnóstico
+          </a>
+          <a className="outline-small" href="#contato">
+            ◉ Falar com a MK
+          </a>
+        </div>
+      </header>
+      <section className="hero" id="inicio">
+        <div className="wrap hero-content">
+          <div className="hero-copy">
+            <h1>
+              Gestão condominial
+              <br />
+              não deve ser improviso.
+              <br />
+              <em>Deve ser método.</em>
+            </h1>
+            <p>
+              Síndico Profissional e Gestão Condominial com experiência
+              executiva, governança e método para mais controle,
+              previsibilidade, segurança nas decisões e valorização do
+              patrimônio.
+            </p>
+            <div className="button-row">
+              <a className="button" href="/diagnostico">
+                Solicitar uma avaliação <Arrow />
+              </a>
+              <a className="button button-ghost" href="/diagnostico">
+                Fazer diagnóstico da gestão <Arrow />
+              </a>
+            </div>
+          </div>
+          <aside className="hero-card">
+            <span className="signature">Marcos Kowalewski</span>
+            <p>
+              Mais de 35 anos de experiência em gestão e liderança empresarial
+              aplicados à realidade condominial.
+            </p>
+            <a href="#sobre">
+              Conheça sua trajetória <Arrow />
+            </a>
+          </aside>
+        </div>
+        <div className="hero-benefits wrap">
+          {[
+            ["hero_gear.webp", "+35 anos de experiência executiva"],
+            ["hero_checklist.webp", "Gestão com método e processos"],
+            ["hero_security.webp", "Governança e transparência"],
+            [
+              "hero_condominium.webp",
+              "Foco em resultados e valorização do patrimônio",
+            ],
+          ].map(([icon, text]) => (
+            <div key={icon}>
+              <Image src={`/hero/${icon}`} alt="" width={36} height={36} />
+              <strong>{text}</strong>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="section problem" id="metodo">
+        <div className="wrap section-heading split-heading">
+          <h2>
+            Seu condomínio está sendo administrado
+            <br />
+            ou apenas reagindo aos problemas?
+          </h2>
+          <p>
+            A gestão reativa resolve o problema de hoje.
+            <br />
+            <strong>
+              Uma gestão profissional trabalha para evitar o problema de amanhã.
+            </strong>
+          </p>
+        </div>
+        <div className="wrap problem-grid">
+          {problems.map(([icon, title, copy]) => (
+            <article key={title}>
+              <Image src={`/problem/${icon}`} alt="" width={50} height={50} />
+              <h3>{title}</h3>
+              <p>{copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="section organization">
+        <div className="wrap organization-grid">
+          <div className="section-heading">
+            <h2>
+              Um condomínio é uma organização.
+              <br />E precisa ser gerido como tal.
+            </h2>
+            <p>
+              Patrimônio, orçamento, contratos, fornecedores, pessoas, riscos e
+              decisões fazem parte de uma operação cada vez mais complexa.
+            </p>
+            <p>
+              Por isso, a MK aplica princípios de gestão e governança à
+              realidade condominial.
+            </p>
+          </div>
+          <div className="process-flow">
+            {process.map(([icon, title], i) => (
+              <div className="process-step" key={title}>
+                <Image
+                  src={`/organization/${icon}`}
+                  alt=""
+                  width={58}
+                  height={58}
+                />
+                <b>0{i + 1}</b>
+                <strong>{title}</strong>
+                {i < 4 && <span className="flow-arrow">→</span>}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="pillars">
+        <div className="wrap">
+          <div className="section-heading light">
+            <h2>
+              Muito além da sindicatura.
+              <br />
+              <em>Pilares da gestão MK.</em>
+            </h2>
+          </div>
+          <div className="pillars-grid">
+            {pillars.map(([icon, title, copy]) => (
+              <article key={title}>
+                <Image src={`/syndic/${icon}`} alt="" width={54} height={54} />
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="about" id="sobre">
+        <div className="about-image">
+          <Image
+            src="/sobre-v2.webp"
+            alt="Marcos Kowalewski, fundador da MK Síndico Profissional"
+            fill
+            sizes="(max-width: 700px) 100vw, 28vw"
+          />
+        </div>
+        <div className="about-copy">
+          <span className="eyebrow">Quem está à frente da MK</span>
+          <h2>Marcos Kowalewski</h2>
+          <h3>Mais de 35 anos de experiência em gestão.</h3>
+          <p>
+            O perfil profissional de Marcos registra mais de 35 anos de
+            experiência em grandes empresas e formação no Instituto Brasileiro
+            de Governança Corporativa — IBGC.
+          </p>
+          <p>
+            Sua trajetória inclui experiência executiva em gestão e
+            desenvolvimento de processos. Foi diretor regional pelo
+            desenvolvimento e implementação do sistema de gestão Lean
+            Construction na HTB Engenharia e, posteriormente, sócio-diretor da
+            MK Gestão Empresarial.
+          </p>
+          <p>
+            Hoje, essa experiência é aplicada à gestão condominial com método,
+            governança, planejamento e foco em resultados sustentáveis.
+          </p>
+          <div className="button-row">
+            <a className="button" href="#contato">
+              Conheça a trajetória completa <Arrow />
+            </a>
+            <a className="button button-light" href="#">
+              in Ver perfil no LinkedIn
+            </a>
+          </div>
+        </div>
+        <div className="credentials">
+          {credentials.map(([icon, title, copy]) => (
+            <div key={title}>
+              <Image src={`/about/${icon}`} alt="" width={44} height={44} />
+              <p>
+                <strong>{title}</strong>
+                <br />
+                {copy}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="section solutions" id="solucoes">
+        <div className="wrap">
+          <div className="section-heading heading-link">
+            <h2>
+              Soluções para diferentes
+              <br />
+              necessidades do condomínio.
+            </h2>
+            <a href="#solucoes">
+              Ver todas as soluções <Arrow />
+            </a>
+          </div>
+          <div className="solution-grid">
+            {services.map(([title, copy], i) => (
+              <article key={title} className={`service-card service-${i + 1}`}>
+                <div className="service-art">
+                  <span>MK</span>
+                </div>
+                <div>
+                  <h3>{title}</h3>
+                  <p>{copy}</p>
+                  <a href="#contato">
+                    Saiba mais <Arrow />
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="section cases">
+        <div className="wrap">
+          <div className="section-heading heading-link">
+            <h2>
+              Experiência percebida na prática.
+              <br />
+              Condomínios que confiam na MK.
+            </h2>
+            <a href="#">
+              Ver todos os cases <Arrow />
+            </a>
+          </div>
+          <div className="case-grid">
+            {cases.map(([title, scenario, result]) => (
+              <article key={title}>
+                <h3>{title}</h3>
+                <div className="case-body">
+                  <div>
+                    <b>Cenário</b>
+                    <p>{scenario}</p>
+                  </div>
+                  <div>
+                    <b>Ação MK</b>
+                    <p>Planejamento, organização e método.</p>
+                  </div>
+                  <div>
+                    <b>Resultado</b>
+                    <p>{result}</p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="diagnostic" id="diagnostico">
+        <div className="wrap diagnostic-grid">
+          <div className="diagnostic-image">
+            <Image
+              src="/maturidade.webp"
+              alt="Diagnóstico de maturidade da gestão condominial exibido em notebook"
+              fill
+              sizes="(max-width: 800px) 100vw, 34vw"
+            />
+          </div>
+          <div>
+            <h2>
+              Qual é o nível de maturidade
+              <br />
+              da gestão do seu condomínio?
+            </h2>
+            <p>
+              Avalie governança, planejamento, contratos, manutenção, finanças,
+              operação, riscos e comunicação e descubra os principais pontos que
+              merecem atenção.
+            </p>
+            <div className="diagnostic-benefits">
+              <span>
+                ♢ Avaliação completa
+                <br />e personalizada
+              </span>
+              <span>
+                ◷ Resultado em
+                <br />
+                poucos minutos
+              </span>
+              <span>
+                ♢ Confidencial e<br />
+                sem compromisso
+              </span>
+            </div>
+          </div>
+          <aside>
+            <h3>
+              Iniciar diagnóstico
+              <br />
+              gratuito
+            </h3>
+            <p>
+              É rápido, simples e pode gerar insights importantes para o seu
+              condomínio.
+            </p>
+            <a className="button" href="/diagnostico">
+              Iniciar agora <Arrow />
+            </a>
+          </aside>
+        </div>
+      </section>
+      <section className="section faq" id="conteudo">
+        <div className="wrap">
+          <div className="section-heading">
+            <h2>Dúvidas frequentes</h2>
+          </div>
+          <div className="faq-grid">
+            {faqs.map((question) => (
+              <details key={question}>
+                <summary>
+                  {question}
+                  <span>+</span>
+                </summary>
+                <p>
+                  Entre em contato com a MK para receber uma orientação adequada
+                  à realidade do seu condomínio.
+                </p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="final-cta" id="contato">
+        <div className="wrap cta-grid">
+          <div>
+            <h2>
+              O próximo problema não precisa ser
+              <br />o motivo para profissionalizar a gestão.
+            </h2>
+            <p>
+              Converse com a MK e descubra como uma gestão estruturada pode
+              aumentar controle, previsibilidade e segurança.
+            </p>
+          </div>
+          <a className="button" href="/diagnostico">
+            Fazer diagnóstico da gestão
+          </a>
+          <a className="button button-ghost" href="https://wa.me/5511999999999">
+            Conversar com a MK ◉
+          </a>
+        </div>
+      </section>
+      <footer>
+        <div className="wrap footer-grid">
+          <div className="footer-brand">
+            <Image
+              src="/logo.webp"
+              alt="MK Síndico Profissional"
+              width={160}
+              height={54}
+            />
+            <p>
+              Síndico Profissional e Gestão Condominial com experiência
+              executiva, método e governança para transformar a gestão e
+              proteger o patrimônio do condomínio.
+            </p>
+            <div className="socials">◎ ◉ ◉ ◉ ◉</div>
+          </div>
+          <div>
+            <h3>Soluções</h3>
+            <a href="#solucoes">Síndico Profissional</a>
+            <a href="#solucoes">Gestão Condominial</a>
+            <a href="#solucoes">Consultoria Condominial</a>
+            <a href="#solucoes">Implantação Condominial</a>
+            <a href="#solucoes">Conselheiro Profissional</a>
+          </div>
+          <div>
+            <h3>Gestão</h3>
+            <a href="#metodo">Governança Condominial</a>
+            <a href="#metodo">Planejamento</a>
+            <a href="#metodo">Gestão Financeira</a>
+            <a href="#metodo">Gestão de Contratos</a>
+            <a href="#metodo">Gestão Operacional</a>
+          </div>
+          <div>
+            <h3>Conheça a MK</h3>
+            <a href="#sobre">Sobre a MK</a>
+            <a href="#sobre">Marcos Kowalewski</a>
+            <a href="#metodo">Método MK</a>
+            <a href="#conteudo">Cases e Experiências</a>
+            <a href="/diagnostico">Diagnóstico</a>
+          </div>
+          <div>
+            <h3>Atendimento</h3>
+            <p>◉ São Paulo · SP</p>
+            <p>◉ (11) 99999-9999</p>
+            <p>✉ contato@mksindico.com.br</p>
+          </div>
+          <div>
+            <h3>Institucional</h3>
+            <a href="#">Política de Privacidade</a>
+            <a href="#">Termos de Uso</a>
+            <a href="#">LGPD</a>
+          </div>
+        </div>
+        <div className="wrap copyright">
+          <span>
+            © 2026 MK Síndico Profissional. Todos os direitos reservados.
+          </span>
+          <span>Desenvolvido com estratégia, método e gestão.</span>
+        </div>
+      </footer>
+    </main>
+  );
 }
