@@ -68,6 +68,28 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
 
         <div className="post-content">
           <div className="post-html" dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
+          <aside className="post-author" aria-label="Sobre o autor">
+            <Image
+              src="/marcos.webp"
+              alt="Marcos Kowalewski"
+              width={524}
+              height={524}
+            />
+            <div>
+              <span>Sobre o autor</span>
+              <h2>Marcos Kowalewski</h2>
+              <strong>Síndico profissional e fundador da MK</strong>
+              <p>
+                Mais de 35 anos de experiência em gestão e liderança
+                empresarial, com formação em Governança Corporativa pelo IBGC.
+                Aplica método, processos e foco em pessoas e resultados à
+                gestão condominial.
+              </p>
+              <Link className="button" href="/diagnostico">
+                Fazer diagnóstico da gestão
+              </Link>
+            </div>
+          </aside>
           <div className="post-share"><strong>Compartilhe este conteúdo</strong><div>
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no WhatsApp"><MessageCircle size={18} /></a>
             <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no LinkedIn"><b>in</b></a>

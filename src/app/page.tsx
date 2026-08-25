@@ -1,17 +1,16 @@
-import {
-  Building2,
-  CalendarDays,
-  CircleDollarSign,
-  ClipboardList,
-  Clock3,
-  FileText,
-  Settings,
-  ShieldCheck,
-  UserRound,
-  UsersRound,
-} from "lucide-react";
+import { CalendarDays } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { getBlogPosts } from "@/lib/blog-api";
+
+export const dynamic = "force-dynamic";
+
+const blogDateFormatter = new Intl.DateTimeFormat("pt-BR", {
+  day: "2-digit",
+  month: "long",
+  year: "numeric",
+  timeZone: "America/Sao_Paulo",
+});
 
 const problems = [
   [
@@ -168,49 +167,13 @@ const faqs = [
   "Como o Conselho acompanha a gestão da MK?",
   "Como funciona o diagnóstico da gestão condominial?",
 ];
-const articles = [
-  {
-    category: "Gestão condominial",
-    title:
-      "Planejamento orçamentário: como construir previsibilidade e segurança para o condomínio",
-    excerpt:
-      "Entenda como um planejamento orçamentário bem estruturado reduz riscos, evita imprevistos e fortalece a saúde financeira do condomínio.",
-    date: "15 de maio de 2025",
-    time: "6 min de leitura",
-    tone: "building",
-  },
-  {
-    category: "Governança",
-    title: "Governança condominial: o papel do Conselho na boa gestão",
-    excerpt:
-      "A atuação estratégica do Conselho é essencial para garantir transparência, controle e decisões alinhadas aos interesses do condomínio.",
-    date: "08 de maio de 2025",
-    time: "5 min de leitura",
-    tone: "meeting",
-  },
-  {
-    category: "Contratos",
-    title: "Contratos bem gerenciados, resultados protegidos",
-    excerpt:
-      "Boas práticas na gestão de contratos garantem conformidade, qualidade na prestação de serviços e proteção ao patrimônio do condomínio.",
-    date: "30 de abril de 2025",
-    time: "4 min de leitura",
-    tone: "contract",
-  },
-];
-const contentCategories = [
-  { icon: UserRound, label: "Síndico Profissional" },
-  { icon: Building2, label: "Gestão Condominial" },
-  { icon: ShieldCheck, label: "Governança" },
-  { icon: UsersRound, label: "Conselho" },
-  { icon: ClipboardList, label: "Planejamento" },
-  { icon: CircleDollarSign, label: "Finanças" },
-  { icon: FileText, label: "Contratos" },
-  { icon: Settings, label: "Operação" },
-];
 const Arrow = () => <span aria-hidden="true">→</span>;
 
-export default function Home() {
+export default async function Home() {
+  const latestPosts = await getBlogPosts(1, 3)
+    .then((result) => result.posts)
+    .catch(() => []);
+
   return (
     <main>
       <script
@@ -616,46 +579,43 @@ export default function Home() {
               planejamento, finanças, contratos, operação e gestão condominial.
             </p>
           </div>
-          <div className="article-grid">
-            {articles.map((article) => (
-              <article className="article-card" key={article.title}>
-                <div
-                  className={`article-placeholder ${article.tone}`}
-                  aria-hidden="true"
-                >
-                  <span>MK</span>
-                </div>
-                <div className="article-copy">
-                  <span className="article-tag">{article.category}</span>
-                  <h3>{article.title}</h3>
-                  <p>{article.excerpt}</p>
-                  <div className="article-meta">
-                    <span>
-                      <CalendarDays size={14} />
-                      {article.date}
-                    </span>
-                    <i aria-hidden="true">·</i>
-                    <span>
-                      <Clock3 size={14} />
-                      {article.time}
-                    </span>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-          <div className="category-heading">
-            <strong>Categorias</strong>
-            <span />
-          </div>
-          <div className="category-grid">
-            {contentCategories.map(({ icon: Icon, label }) => (
-              <a href="#conteudo" key={label}>
-                <Icon size={27} strokeWidth={1.7} />
-                <span>{label}</span>
-              </a>
-            ))}
-          </div>
+          {latestPosts.length > 0 ? (
+            <div className="article-grid">
+              {latestPosts.map((article) => (
+                <article className="article-card" key={article.id}>
+                  <Link className="article-link" href={`/blog/${article.slug}`}>
+                    <div className="article-placeholder">
+                      {article.coverImageUrl ? (
+                        <Image
+                          src={article.coverImageUrl}
+                          alt={article.coverImageAlt ?? article.title}
+                          fill
+                          sizes="(max-width: 760px) 100vw, 33vw"
+                        />
+                      ) : (
+                        <span aria-hidden="true">MK</span>
+                      )}
+                    </div>
+                    <div className="article-copy">
+                      <span className="article-tag">{article.category}</span>
+                      <h3>{article.title}</h3>
+                      <p>{article.excerpt}</p>
+                      <div className="article-meta">
+                        <span>
+                          <CalendarDays size={14} />
+                          {blogDateFormatter.format(new Date(article.publishedAt))}
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <p className="article-empty">
+              Novos conteúdos serão publicados em breve.
+            </p>
+          )}
           <div className="knowledge-action">
             <Link className="button" href="/blog">
               Ver todos os conteúdos <Arrow />

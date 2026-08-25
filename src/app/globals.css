@@ -703,12 +703,18 @@ img {
   background: #fff;
   box-shadow: 0 8px 20px rgba(15, 43, 73, 0.09);
 }
+.article-link { display: block; height: 100%; }
 .article-placeholder {
+  position: relative;
   display: grid;
+  overflow: hidden;
   height: 145px;
   place-items: center;
   background: linear-gradient(135deg, #0a2c4d, #7890a5);
 }
+.article-placeholder img { object-fit: cover; transition: transform .35s ease; }
+.article-link:hover .article-placeholder img { transform: scale(1.025); }
+.article-link:hover .article-copy h3 { color: var(--blue); }
 .article-placeholder.meeting { background: linear-gradient(135deg, #53697d, #071a2c); }
 .article-placeholder.contract { background: linear-gradient(135deg, #b8c1ca, #172534); }
 .article-placeholder span {
@@ -748,37 +754,7 @@ img {
 }
 .article-meta span { display: flex; align-items: center; gap: 6px; }
 .article-meta i { font-style: normal; }
-.category-heading {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-top: 26px;
-  color: var(--blue);
-  font: 750 12px var(--font-display);
-  text-transform: uppercase;
-}
-.category-heading span { height: 1px; flex: 1; background: #8fbcf0; }
-.category-grid {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 10px;
-  margin-top: 12px;
-}
-.category-grid a {
-  display: flex;
-  min-height: 58px;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  padding: 8px;
-  border: 1px solid #438ff1;
-  border-radius: 5px;
-  color: var(--blue);
-  transition: 0.2s ease;
-}
-.category-grid a:hover { color: #fff; background: var(--blue); }
-.category-grid span { color: var(--ink); font: 650 10px/1.25 var(--font-display); }
-.category-grid a:hover span { color: #fff; }
+.article-empty { margin: 28px 0 0; padding: 30px; border: 1px solid #dae3ed; background: #fff; color: var(--muted); text-align: center; }
 .knowledge-action { display: flex; justify-content: center; margin-top: 22px; }
 .knowledge-action .button { min-width: 350px; }
 .faq-grid {
@@ -910,9 +886,6 @@ footer {
   }
   .solution-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-  .category-grid {
-    grid-template-columns: repeat(4, 1fr);
   }
   .method-mk-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -1085,9 +1058,6 @@ footer {
   .article-copy h3,
   .article-copy > p {
     min-height: 0;
-  }
-  .category-grid {
-    grid-template-columns: repeat(2, 1fr);
   }
   .knowledge-action .button {
     width: 100%;
@@ -1303,7 +1273,14 @@ footer {
 .post-html figcaption{margin-top:-16px;color:var(--muted);font-size:10px}
 .post-html table{display:block;overflow-x:auto;width:100%;margin:24px 0;border-collapse:collapse}
 .post-html th,.post-html td{padding:10px;border:1px solid var(--line);font-size:12px;text-align:left}
+.post-author{display:grid;grid-template-columns:112px 1fr;gap:22px;margin-top:38px;padding:24px;border-left:4px solid var(--blue);background:var(--mist)}
+.post-author>img{width:112px;height:112px;border-radius:50%;object-fit:cover}
+.post-author>div>span{color:var(--blue);font:750 9px var(--font-display);letter-spacing:.09em;text-transform:uppercase}
+.post-content .post-author h2{margin:4px 0 1px;font:750 21px/1.2 var(--font-display)}
+.post-author strong{color:#31465e;font:700 10px var(--font-display)}
+.post-content .post-author p{margin:9px 0 15px;color:#40536a;font-size:11px;line-height:1.65}
+.post-author .button{min-height:38px;padding:0 15px;font-size:9px}
 .post-share a{display:grid;width:34px;height:34px;place-items:center;border:1px solid #87a8c9;border-radius:4px;background:#fff;color:var(--blue)}
 .post-share a:first-child{border-color:#4bc778;color:#18ae52}
 .post-related-card .blog-card-link>div:last-child{padding:14px}
-@media(max-width:760px){.post-related-card{display:block}.post-related-card .blog-card-link{display:grid;grid-template-columns:38% 1fr}.post-related-card .blog-card-image{height:100%}}
+@media(max-width:760px){.post-author{grid-template-columns:76px 1fr;gap:16px;padding:18px}.post-author>img{width:76px;height:76px}.post-author .button{grid-column:1/-1;width:100%}.post-related-card{display:block}.post-related-card .blog-card-link{display:grid;grid-template-columns:38% 1fr}.post-related-card .blog-card-image{height:100%}}
