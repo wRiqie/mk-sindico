@@ -803,7 +803,24 @@ export default async function Home() {
           <span>
             © 2026 MK Síndico Profissional. Todos os direitos reservados.
           </span>
-          <span>Desenvolvido com estratégia, método e gestão.</span>
+          <a
+            className="developer-credit"
+            href="https://viabilizze.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Desenvolvido por Viabilizze — visitar site"
+          >
+            <span>Desenvolvido por</span>
+            <Image
+              src="/viabilizze.webp"
+              alt="Viabilizze"
+              width={116}
+              height={26}
+            />
+            <span className="developer-credit-arrow" aria-hidden="true">
+              ↗
+            </span>
+          </a>
         </div>
       </footer>
     </main>
