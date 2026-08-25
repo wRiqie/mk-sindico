@@ -119,18 +119,22 @@ const services = [
   [
     "Síndico profissional",
     "Gestão executiva, representação e acompanhamento de operação com visão profissional e estruturada.",
+    "sindico_profissional.webp",
   ],
   [
     "Consultoria condominial",
     "Diagnóstico, análise e estruturação da gestão para resolver problemas ou potencializar resultados.",
+    "consultoria_condominial.webp",
   ],
   [
     "Implantação condominial",
     "Estruturação da operação para condomínios em fase de implantação ou início de funcionamento.",
+    "implantacao_condominial.webp",
   ],
   [
     "Conselheiro profissional",
     "Apoio técnico e independente para fortalecer a governança e auxiliar o Conselho na tomada de decisões.",
+    "conselheiro_profissional.webp",
   ],
 ];
 const serviceSlugs = [
@@ -157,15 +161,88 @@ const cases = [
   ],
 ];
 const faqs = [
-  "O que faz um síndico profissional?",
-  "Como funciona a contratação da MK?",
-  "Quais tipos de condomínio a MK atende?",
-  "Qual a diferença entre síndico profissional e administrador?",
-  "Como funciona a troca de síndico?",
-  "Em quais regiões a MK atua?",
-  "Quanto custa um síndico profissional?",
-  "Como o Conselho acompanha a gestão da MK?",
-  "Como funciona o diagnóstico da gestão condominial?",
+  {
+    question: "O que faz um síndico profissional?",
+    answer: [
+      "O síndico profissional é responsável pela gestão estratégica, administrativa, financeira e operacional do condomínio. Seu trabalho envolve planejamento, controle de despesas, gestão de contratos e fornecedores, acompanhamento de manutenções, liderança de equipes, prestação de contas, cumprimento das obrigações legais e comunicação com Conselho e moradores.",
+      "Na MK Síndico Profissional, a gestão é conduzida com método, processos e indicadores, buscando mais organização, transparência, previsibilidade e segurança para o condomínio.",
+    ],
+  },
+  {
+    question: "Quando vale a pena contratar um síndico profissional?",
+    answer: [
+      "A contratação de um síndico profissional pode ser especialmente indicada quando o condomínio enfrenta dificuldades recorrentes de gestão, falta de planejamento, problemas com fornecedores, ausência de manutenção preventiva, conflitos, pouca transparência financeira, sobrecarga do síndico morador ou dificuldade para executar as decisões do Conselho e das assembleias.",
+      "Também não é necessário esperar surgir uma crise. A gestão profissional pode ser adotada de forma preventiva para organizar processos, reduzir riscos e aumentar a previsibilidade administrativa, operacional e financeira do condomínio.",
+    ],
+  },
+  {
+    question: "Como funciona a contratação da MK?",
+    answer: [
+      "A contratação começa com uma conversa para entendermos o cenário atual, as características do condomínio, sua estrutura, principais desafios e expectativas do Conselho e dos moradores.",
+      "A partir desse levantamento, a MK Síndico Profissional apresenta uma proposta de atuação adequada às necessidades identificadas.",
+      "Após a aprovação e os procedimentos previstos pelo condomínio, é realizado o planejamento da transição e o início da gestão, com definição de prioridades, responsabilidades e processos.",
+    ],
+  },
+  {
+    question: "Quais tipos de condomínio a MK atende?",
+    answer: [
+      "A MK Síndico Profissional atua na gestão de condomínios residenciais de pequeno e grande porte, condomínios-clube, condomínios mistos e outros empreendimentos condominiais, considerando as características, estrutura e necessidades específicas de cada condomínio.",
+      "Cada empreendimento é analisado individualmente para que o modelo de gestão seja adequado à sua realidade, estrutura operacional e principais desafios.",
+    ],
+  },
+  {
+    question: "Qual a diferença entre síndico profissional e administradora?",
+    answer: [
+      "A administradora e o síndico exercem funções diferentes e complementares na gestão do condomínio.",
+      "A administradora presta suporte ao condomínio e ao síndico, auxiliando nas rotinas administrativas, financeiras, trabalhistas e documentais, conforme os serviços contratados.",
+      "O síndico é o representante legal do condomínio, responsável por sua administração e pela defesa dos interesses comuns dos condôminos. Entre suas atribuições estão tomar e executar decisões de gestão, acompanhar contratos e fornecedores, conduzir a operação, cumprir e fazer cumprir as deliberações da assembleia e prestar contas de sua gestão aos condôminos.",
+      "O síndico também pode ser responsabilizado civil e, conforme o caso, criminalmente por atos ou omissões praticados no exercício de suas funções, nos termos da legislação aplicável.",
+      "Na MK, a atuação do síndico profissional ocorre em conjunto com administradora, Conselho, funcionários e fornecedores, mantendo claramente definidas as responsabilidades de cada parte.",
+    ],
+  },
+  {
+    question: "Em quais regiões a MK atua?",
+    answer: [
+      "A MK Síndico Profissional atua na Grande São Paulo, atendendo atualmente principalmente condomínios localizados nas zonas Sul, Oeste e Central da cidade de São Paulo.",
+      "A possibilidade de atendimento é avaliada de acordo com a localização, porte, estrutura e necessidades de cada condomínio.",
+      "Para verificar o atendimento ao seu condomínio, entre em contato com a MK informando a cidade ou bairro e as principais características do empreendimento.",
+    ],
+  },
+  {
+    question: "Quanto custa um síndico profissional?",
+    answer: [
+      "O valor da contratação de um síndico profissional varia de acordo com as características e a complexidade de cada condomínio.",
+      "Entre os fatores considerados estão número de unidades, estrutura do empreendimento, quantidade de funcionários e fornecedores, demandas operacionais, situação administrativa e financeira e nível de dedicação necessário para a gestão.",
+      "Por isso, a MK realiza uma análise antes de apresentar uma proposta. Dessa forma, o condomínio recebe uma solução compatível com suas necessidades reais, em vez de um serviço padronizado.",
+      "Solicite uma avaliação e receba uma proposta para o seu condomínio.",
+    ],
+  },
+  {
+    question: "Como o Conselho acompanha a gestão da MK?",
+    answer: [
+      "Transparência e prestação de contas fazem parte do modelo de gestão da MK Síndico Profissional.",
+      "O Conselho acompanha informações relevantes sobre a administração do condomínio, incluindo situação financeira, contratos, fornecedores, manutenções, projetos, ocorrências, ações executadas e prioridades da gestão.",
+      "A proposta é permitir que o Conselho exerça seu papel de acompanhamento com informações organizadas e critérios objetivos, contribuindo para decisões mais fundamentadas.",
+    ],
+  },
+  {
+    question: "Como funciona o Diagnóstico da Gestão Condominial?",
+    answer: [
+      "O Diagnóstico da Gestão Condominial é uma avaliação que ajuda a identificar o nível de organização e maturidade da administração do condomínio.",
+      "São analisados aspectos relacionados a planejamento, finanças, contratos, manutenção, processos, governança, comunicação, gestão de fornecedores e outros pontos relevantes para a operação.",
+      "Ao final, o condomínio consegue visualizar pontos fortes, vulnerabilidades e oportunidades de melhoria.",
+      "O diagnóstico também pode servir como ponto de partida para definir prioridades e estruturar um plano de evolução da gestão.",
+      "Faça o Diagnóstico da Gestão Condominial da MK.",
+    ],
+  },
+  {
+    question: "Como funciona a troca de síndico?",
+    answer: [
+      "A substituição do síndico deve seguir a convenção do condomínio, as deliberações da assembleia e a legislação aplicável.",
+      "Após a definição da nova gestão, é realizado um processo de transição que pode envolver documentos, contratos, informações financeiras, fornecedores, funcionários, manutenções em andamento, pendências e demais informações necessárias para garantir a continuidade da administração.",
+      "Na MK, essa etapa é tratada de forma estruturada, buscando reduzir riscos, preservar informações e proporcionar uma transição organizada para a nova gestão.",
+    ],
+  },
 ];
 const Arrow = () => <span aria-hidden="true">→</span>;
 
@@ -248,8 +325,8 @@ export default async function Home() {
               patrimônio.
             </p>
             <div className="button-row">
-              <a className="button" href="/diagnostico">
-                Solicitar uma avaliação <Arrow />
+              <a className="button" href="https://wa.me/5511972055176">
+                Solicitar uma Proposta Comercial <Arrow />
               </a>
               <a className="button button-ghost" href="/diagnostico">
                 Fazer diagnóstico da gestão <Arrow />
@@ -313,8 +390,8 @@ export default async function Home() {
         <div className="wrap organization-grid">
           <div className="section-heading">
             <h2>
-              Um condomínio é uma organização.
-              <br />E precisa ser gerido como tal.
+              Um condomínio é como uma empresa.
+              <br />E precisa ser gerido de forma profissional.
             </h2>
             <p>
               Patrimônio, orçamento, contratos, fornecedores, pessoas, riscos e
@@ -440,8 +517,8 @@ export default async function Home() {
           </div>
         </div>
         <div className="method-mk-action">
-          <a className="button" href="#contato">
-            Conhecer o Método MK <Arrow />
+          <a className="button" href="/diagnostico">
+            Fazer Diagnóstico da Gestão do Condomínio Gratuito <Arrow />
           </a>
         </div>
       </section>
@@ -455,10 +532,15 @@ export default async function Home() {
             </h2>
           </div>
           <div className="solution-grid">
-            {services.map(([title, copy], i) => (
+            {services.map(([title, copy, image], i) => (
               <article key={title} className={`service-card service-${i + 1}`}>
                 <div className="service-art">
-                  <span>MK</span>
+                  <Image
+                    src={`/soluctions/${image}`}
+                    alt={`${title} da MK Síndico Profissional`}
+                    fill
+                    sizes="(max-width: 700px) 100vw, (max-width: 960px) 50vw, 25vw"
+                  />
                 </div>
                 <div>
                   <h3>{title}</h3>
@@ -623,16 +705,15 @@ export default async function Home() {
             <h2>Dúvidas frequentes</h2>
           </div>
           <div className="faq-grid">
-            {faqs.map((question) => (
+            {faqs.map(({ question, answer }) => (
               <details key={question}>
                 <summary>
                   {question}
                   <span>+</span>
                 </summary>
-                <p>
-                  Entre em contato com a MK para receber uma orientação adequada
-                  à realidade do seu condomínio.
-                </p>
+                {answer.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </details>
             ))}
           </div>

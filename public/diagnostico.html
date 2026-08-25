@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#050b14">
-<title>Diagnóstico da Gestão Condominial — Angelo Ferraz</title>
+<title>Diagnóstico da Gestão Condominial — Marcos Kowalewski</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{
@@ -338,10 +338,10 @@ input:focus{border-color:var(--gold)}
       <div class="final-cta">
         <div>
           <strong>Transforme percepção em evidência.</strong>
-          <p>Agende uma reunião com Angelo Ferraz para entender os pontos identificados e avaliar a realização de um Diagnóstico Técnico da Gestão Condominial baseado em documentos e evidências reais do condomínio.</p>
+          <p>Agende uma reunião com Marcos Kowalewski para entender os pontos identificados e avaliar a realização de um Diagnóstico Técnico da Gestão Condominial baseado em documentos e evidências reais do condomínio.</p>
         </div>
         <div class="actions">
-          <button class="primary" id="scheduleBtn">Agendar com Angelo Ferraz</button>
+          <button class="primary" id="scheduleBtn">Agendar com Marcos Kowalewski</button>
           <button class="secondary" id="pdfBtn">Gerar / compartilhar PDF</button>
           <button class="secondary" id="restartBtn">Refazer</button>
         </div>
@@ -443,14 +443,14 @@ document.getElementById("showResult").onclick=()=>{show("loading");setTimeout(()
 
 function summaryText(){
 const r=lastResult||calc(), lv=level(r.general), name=document.getElementById("leadName").value.trim(), condo=document.getElementById("leadCondo").value.trim();
-return `Diagnóstico da Gestão Condominial — Angelo Ferraz\n\n${name}${condo?` | ${condo}`:""}\nÍndice de Maturidade Percebida: ${r.general}/100\n${lv[0]}\n\nImportante: este resultado reflete a percepção do participante e não substitui diagnóstico técnico baseado em documentos e evidências do condomínio.\n\nPróximo passo recomendado: agendar uma reunião com Angelo Ferraz para avaliar um Diagnóstico Técnico da Gestão Condominial.`;
+return `Diagnóstico da Gestão Condominial — Marcos Kowalewski\n\n${name}${condo?` | ${condo}`:""}\nÍndice de Maturidade Percebida: ${r.general}/100\n${lv[0]}\n\nImportante: este resultado reflete a percepção do participante e não substitui diagnóstico técnico baseado em documentos e evidências do condomínio.\n\nPróximo passo recomendado: agendar uma reunião com Marcos Kowalewski para avaliar um Diagnóstico Técnico da Gestão Condominial.`;
 }
 async function buildPdfBlob(){
 if(!window.jspdf) throw new Error("Biblioteca de PDF não carregada. Verifique sua conexão com a internet.");
 const {jsPDF}=window.jspdf;const doc=new jsPDF({unit:"mm",format:"a4"});
 const r=lastResult||calc(), lv=level(r.general), name=document.getElementById("leadName").value.trim()+" "+document.getElementById("leadLast").value.trim(), condo=document.getElementById("leadCondo").value.trim(), city=document.getElementById("leadCity").value.trim();
 doc.setFillColor(5,11,20);doc.rect(0,0,210,297,"F");
-doc.setTextColor(237,198,111);doc.setFontSize(17);doc.text("ANGELO FERRAZ",18,22);doc.setFontSize(8);doc.setTextColor(210,214,220);doc.text("GOVERNANÇA CONDOMINIAL",18,28);
+doc.setTextColor(237,198,111);doc.setFontSize(17);doc.text("MARCOS KOWALEWSKI",18,22);doc.setFontSize(8);doc.setTextColor(210,214,220);doc.text("GOVERNANÇA CONDOMINIAL",18,28);
 doc.setDrawColor(216,164,76);doc.line(18,34,192,34);
 doc.setTextColor(245,244,239);doc.setFontSize(18);doc.text("Diagnóstico da Gestão Condominial",18,47);
 doc.setFontSize(9);doc.setTextColor(175,183,195);doc.text(`${name}${condo?` • ${condo}`:""}${city?` • ${city}`:""}`,18,54);
@@ -460,7 +460,7 @@ doc.setTextColor(178,187,200);doc.setFontSize(9);const intro=doc.splitTextToSize
 let y=111;doc.setTextColor(243,207,125);doc.setFontSize(11);doc.text("RESULTADO POR PILAR",18,y);y+=8;
 Object.entries(r.ps).forEach(([k,v])=>{doc.setTextColor(230,231,234);doc.setFontSize(9);doc.text(pillars[k].name,18,y);doc.text(`${v}/100`,178,y);doc.setFillColor(31,44,62);doc.roundedRect(18,y+3,174,3,1.5,1.5,"F");doc.setFillColor(216,164,76);doc.roundedRect(18,y+3,174*v/100,3,1.5,1.5,"F");y+=13;});
 y+=2;doc.setTextColor(243,207,125);doc.setFontSize(11);doc.text("LEITURA CORRETA DO RESULTADO",18,y);y+=7;doc.setTextColor(210,214,220);doc.setFontSize(8.8);const ptxt=doc.splitTextToSize("Este resultado é uma percepção baseada nas respostas do participante. Ele não substitui um diagnóstico técnico. Para confirmar riscos, conformidades e o nível real de governança, é recomendável analisar documentos, contratos, laudos, registros, evidências operacionais e controles do condomínio.",174);doc.text(ptxt,18,y);y+=28;
-doc.setTextColor(243,207,125);doc.setFontSize(11);doc.text("PRÓXIMO PASSO RECOMENDADO",18,y);y+=7;doc.setTextColor(235,236,238);doc.setFontSize(9);const cta=doc.splitTextToSize("Agende uma reunião com Angelo Ferraz para interpretar os principais gaps identificados e avaliar a realização de um Diagnóstico Técnico da Gestão Condominial baseado em documentos e evidências reais.",174);doc.text(cta,18,y);
+doc.setTextColor(243,207,125);doc.setFontSize(11);doc.text("PRÓXIMO PASSO RECOMENDADO",18,y);y+=7;doc.setTextColor(235,236,238);doc.setFontSize(9);const cta=doc.splitTextToSize("Agende uma reunião com Marcos Kowalewski para interpretar os principais gaps identificados e avaliar a realização de um Diagnóstico Técnico da Gestão Condominial baseado em documentos e evidências reais.",174);doc.text(cta,18,y);
 doc.setTextColor(130,141,156);doc.setFontSize(7);doc.text("Relatório gerado automaticamente a partir do quiz de percepção.",18,286);
 return doc.output("blob");
 }
@@ -473,10 +473,9 @@ else{const url=URL.createObjectURL(blob);const a=document.createElement("a");a.h
 }catch(e){status.textContent="Não foi possível gerar o PDF automaticamente. Use a impressão do navegador como fallback. "+e.message;window.print()}
 };
 document.getElementById("scheduleBtn").onclick=()=>{
-const msg=encodeURIComponent("Olá, Angelo. Fiz o Diagnóstico da Gestão Condominial e gostaria de agendar uma reunião para entender melhor o resultado e avaliar um diagnóstico técnico do condomínio.");
-// Substitua abaixo pelo número oficial do Angelo no formato 55DDDNUMERO:
-const ANGELO_WHATSAPP="5511992842011";
-window.open(`https://wa.me/${ANGELO_WHATSAPP}?text=${msg}`,"_blank");
+const msg=encodeURIComponent("Olá, Marcos. Fiz o Diagnóstico da Gestão Condominial e gostaria de agendar uma reunião para entender melhor o resultado e avaliar um diagnóstico técnico do condomínio.");
+const MARCOS_WHATSAPP="5511972055176";
+window.open(`https://wa.me/${MARCOS_WHATSAPP}?text=${msg}`,"_blank");
 };
 document.getElementById("restartBtn").onclick=()=>location.reload();
 </script>

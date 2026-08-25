@@ -69,7 +69,7 @@ export default async function SolutionPage({ params }: PageProps<"/solucoes/[slu
 
     <section className="solution-hero">
       <div className="wrap solution-hero-grid">
-        <div><span className="solution-eyebrow">{solution.eyebrow}</span><h1>{solution.title}</h1><p>{solution.intro}</p><div className="button-row"><Link className="button" href="/#contato">Conversar sobre esta solução <ArrowRight size={16}/></Link><Link className="button button-ghost" href="/diagnostico">Fazer diagnóstico</Link></div></div>
+        <div><span className="solution-eyebrow">{solution.eyebrow}</span><h1>{solution.title}</h1><p>{solution.intro}</p><div className="button-row"><Link className="button" href="/#contato">Conversar sobre esta solução <ArrowRight size={16}/></Link><Link className="button button-ghost" href="/diagnostico">Fazer Diagnóstico da Gestão do Condomínio Gratuito</Link></div></div>
         <aside><ShieldCheck size={34}/><strong>Gestão com método</strong><p>Experiência executiva aplicada à realidade do condomínio, com governança, acompanhamento e foco em resultados.</p></aside>
       </div>
     </section>

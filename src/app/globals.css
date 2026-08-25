@@ -526,25 +526,13 @@ img {
   background: #fff;
 }
 .service-art {
-  height: 122px;
-  background: linear-gradient(120deg, #132c46, #62788c);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #132c46;
 }
-.service-2 .service-art {
-  background: linear-gradient(140deg, #c9d1d9, #344c62);
-}
-.service-3 .service-art {
-  background: linear-gradient(140deg, #89704f, #193651);
-}
-.service-4 .service-art {
-  background: linear-gradient(140deg, #9eabb7, #071727);
-}
-.service-art span {
-  font: 800 54px var(--font-display);
-  color: #ffffff2b;
-  letter-spacing: -0.12em;
+.service-art img {
+  object-fit: cover;
 }
 .service-card > div:last-child {
   padding: 13px;
