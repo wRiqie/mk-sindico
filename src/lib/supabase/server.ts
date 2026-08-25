@@ -8,12 +8,12 @@ export function getSupabaseServerClient() {
     return serverClient;
   }
 
-  const url = process.env.NEXT_SUPABASE_URL;
-  const publishableKey = process.env.NEXT_SUPABASE_PUBLISHABLE_KEY;
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const publishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
   if (!url || !publishableKey) {
     throw new Error(
-      "NEXT_SUPABASE_URL and NEXT_SUPABASE_PUBLISHABLE_KEY must be configured.",
+      "NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY must be configured.",
     );
   }
 
@@ -32,12 +32,12 @@ export function getSupabaseAdminClient() {
     return adminClient;
   }
 
-  const url = process.env.NEXT_SUPABASE_URL;
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const secretKey = process.env.SUPABASE_SECRET_KEY;
 
   if (!url || !secretKey) {
     throw new Error(
-      "NEXT_SUPABASE_URL and SUPABASE_SECRET_KEY must be configured.",
+      "NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SECRET_KEY must be configured.",
     );
   }
 

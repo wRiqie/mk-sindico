@@ -1,10 +1,3 @@
-type AllowedImageType =
-  | "image/avif"
-  | "image/gif"
-  | "image/jpeg"
-  | "image/png"
-  | "image/webp";
-
 export type BlogPostInput = {
   title: string;
   slug: string;
@@ -14,7 +7,7 @@ export type BlogPostInput = {
   category: string;
   image: {
     bytes: Buffer;
-    mimeType: AllowedImageType;
+    mimeType: "image/png";
     alt: string;
   } | null;
   author: string;
@@ -55,41 +48,18 @@ function readTags(value: unknown) {
   return [...new Set(tags.map((tag) => tag.trim()).filter(Boolean))];
 }
 
-function detectMimeType(bytes: Buffer): AllowedImageType | null {
-  if (bytes.subarray(0, 3).equals(Buffer.from([0xff, 0xd8, 0xff]))) return "image/jpeg";
-  if (bytes.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))) return "image/png";
-  if (["GIF87a", "GIF89a"].includes(bytes.subarray(0, 6).toString("ascii"))) return "image/gif";
-  if (bytes.subarray(0, 4).toString("ascii") === "RIFF" && bytes.subarray(8, 12).toString("ascii") === "WEBP") return "image/webp";
-  if (bytes.subarray(4, 12).toString("ascii").startsWith("ftypavi")) return "image/avif";
-  return null;
-}
-
 function readImage(payload: Record<string, unknown>, title: string) {
-  const value = payload.image ?? payload.Image ?? payload.imageBase64;
+  const value = payload.image;
   if (value === undefined || value === null || value === "") return null;
 
-  let base64: unknown = value;
-  let declaredMimeType: unknown = payload.imageMimeType;
-  let alt: unknown = payload.imageAlt;
-
-  if (typeof value === "object" && !Array.isArray(value)) {
-    const image = value as Record<string, unknown>;
-    base64 = image.base64;
-    declaredMimeType = image.mimeType ?? declaredMimeType;
-    alt = image.alt ?? alt;
+  if (typeof value !== "string") {
+    throw new BlogInputError("image must be a Base64 string.");
   }
 
-  if (typeof base64 !== "string") {
-    throw new BlogInputError("image.base64 must be a string.");
-  }
-
-  let encodedImage = base64;
-  const dataUrl = encodedImage.match(
-    /^data:(image\/[a-z0-9.+-]+);base64,([\s\S]+)$/i,
-  );
+  let encodedImage = value;
+  const dataUrl = encodedImage.match(/^data:image\/png;base64,([\s\S]+)$/i);
   if (dataUrl) {
-    declaredMimeType = dataUrl[1].toLowerCase();
-    encodedImage = dataUrl[2];
+    encodedImage = dataUrl[1];
   }
 
   const normalizedBase64 = encodedImage.replace(/\s/g, "");
@@ -102,18 +72,17 @@ function readImage(payload: Record<string, unknown>, title: string) {
     throw new BlogInputError("image must have at most 10 MB.");
   }
 
-  const detectedMimeType = detectMimeType(bytes);
-  if (!detectedMimeType) {
-    throw new BlogInputError("image format is not supported.");
-  }
-  if (declaredMimeType && declaredMimeType !== detectedMimeType) {
-    throw new BlogInputError("image MIME type does not match its contents.");
+  const pngSignature = Buffer.from([
+    0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a,
+  ]);
+  if (!bytes.subarray(0, 8).equals(pngSignature)) {
+    throw new BlogInputError("image must contain a valid PNG file.");
   }
 
   return {
     bytes,
-    mimeType: detectedMimeType,
-    alt: optionalString(alt, "imageAlt") ?? title,
+    mimeType: "image/png" as const,
+    alt: title,
   };
 }
 
