@@ -395,9 +395,6 @@ export default async function Home() {
             <a className="button" href="#contato">
               Conheça a trajetória completa <Arrow />
             </a>
-            <a className="button button-light" href="#">
-              in Ver perfil no LinkedIn
-            </a>
           </div>
         </div>
         <div className="credentials">
