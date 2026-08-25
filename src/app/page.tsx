@@ -391,11 +391,6 @@ export default async function Home() {
             Hoje, essa experiência é aplicada à gestão condominial com método,
             governança, planejamento e foco em resultados sustentáveis.
           </p>
-          <div className="button-row">
-            <a className="button" href="#contato">
-              Conheça a trajetória completa <Arrow />
-            </a>
-          </div>
         </div>
         <div className="credentials">
           {credentials.map(([icon, title, copy]) => (
