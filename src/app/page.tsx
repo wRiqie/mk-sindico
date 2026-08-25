@@ -1,7 +1,7 @@
+import { getBlogPosts } from "@/lib/blog-api";
 import { CalendarDays } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { getBlogPosts } from "@/lib/blog-api";
 
 export const dynamic = "force-dynamic";
 
@@ -603,7 +603,9 @@ export default async function Home() {
                       <div className="article-meta">
                         <span>
                           <CalendarDays size={14} />
-                          {blogDateFormatter.format(new Date(article.publishedAt))}
+                          {blogDateFormatter.format(
+                            new Date(article.publishedAt),
+                          )}
                         </span>
                       </div>
                     </div>
@@ -659,8 +661,8 @@ export default async function Home() {
           <a className="button" href="/diagnostico">
             Fazer diagnóstico da gestão
           </a>
-          <a className="button button-ghost" href="https://wa.me/5511999999999">
-            Conversar com a MK ◉
+          <a className="button button-ghost" href="https://wa.me/5511972055176">
+            Conversar com a MK
           </a>
         </div>
       </section>
@@ -678,7 +680,6 @@ export default async function Home() {
               executiva, método e governança para transformar a gestão e
               proteger o patrimônio do condomínio.
             </p>
-            <div className="socials">◎ ◉ ◉ ◉ ◉</div>
           </div>
           <div>
             <h3>Soluções</h3>
@@ -714,9 +715,9 @@ export default async function Home() {
           </div>
           <div>
             <h3>Atendimento</h3>
-            <p>◉ São Paulo · SP</p>
-            <p>◉ (11) 99999-9999</p>
-            <p>✉ contato@mksindico.com.br</p>
+            <p>São Paulo · SP</p>
+            <p>(11) 97205-5176</p>
+            <p>contato@mksindico.com.br</p>
           </div>
           <div>
             <h3>Institucional</h3>
