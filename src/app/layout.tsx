@@ -50,6 +50,9 @@ export const metadata: Metadata = {
     title: "MK Síndico Profissional | Gestão Condominial com Método",
     description: "Gestão condominial não deve ser improviso. Deve ser método.",
   },
+  verification: {
+    google: "Jk8W77Xsc0FcKZpo2W3dp-etiwnuIniWeNs3QOmedJc",
+  },
   robots: { index: true, follow: true },
 };
 
