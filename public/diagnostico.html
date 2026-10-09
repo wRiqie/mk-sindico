@@ -433,13 +433,41 @@ document.getElementById("leadBack").onclick=()=>{qIndex=Q.length-1;renderQuestio
 function calc(){const s={},w={};Object.keys(pillars).forEach(k=>{s[k]=0;w[k]=0});Q.forEach((x,i)=>{const ww=x.weight||1,v=answers[i]?.value??0;s[x.p]+=v*ww;w[x.p]+=100*ww});const ps={};Object.keys(pillars).forEach(k=>ps[k]=Math.round(s[k]/w[k]*100));return{ps,general:Math.round(Object.values(ps).reduce((a,b)=>a+b,0)/7)}}
 function level(v){if(v<40)return["Nível 1 — Gestão Reativa","As respostas indicam alta dependência de ações corretivas, pessoas-chave e controles pouco estruturados. O ponto de partida é validar documentalmente os riscos e organizar a base da operação."];if(v<55)return["Nível 2 — Em Organização","Há iniciativas de controle, mas ainda existe fragilidade relevante em padronização, continuidade e previsibilidade. O diagnóstico técnico deve confirmar onde estão os maiores gaps."];if(v<70)return["Nível 3 — Gestão Estruturada","A percepção indica uma base consistente, porém com pilares que ainda precisam evoluir. O passo seguinte é validar evidências e transformar pontos de atenção em prioridades objetivas."];if(v<85)return["Nível 4 — Gestão Governada","A percepção é de bom nível de estrutura e controle. Ainda assim, somente a análise documental e operacional confirma se os controles realmente existem, estão atualizados e funcionam de forma consistente."];return["Nível 5 — Alta Performance","A percepção é de elevada maturidade. O próximo desafio é confirmar as evidências, testar consistência dos controles e identificar oportunidades de melhoria contínua."]}
 const pc={gov:["Governança e Planejamento","Validar planejamento, responsabilidades e continuidade da gestão."],comp:["Compliance e Riscos","Confirmar regularidade documental, vencimentos e tratamento dos riscos."],maint:["Manutenção e Ativos","Verificar inventário, histórico e plano de manutenção dos ativos críticos."],cont:["Contratos e Fornecedores","Analisar contratos, escopos, SLAs e evidências de desempenho."],ops:["Operação e Processos","Confirmar procedimentos, fluxos, chamados, responsáveis e registros."],fin:["Financeiro, OPEX e CAPEX","Analisar planejamento financeiro, investimentos e desvios orçamentários."],data:["Indicadores e Decisão","Validar KPIs utilizados e a qualidade dos dados que sustentam decisões."]};
+const DIAGNOSIS_WEBHOOK="https://automations-n8n.ygppyi.easypanel.host/webhook/mk-diagnostico";
+const answerFields=["governanca_1","governanca_2","governanca_3","compliance_1","compliance_2","compliance_3","manutencao_1","manutencao_2","manutencao_3","contratos_1","contratos_2","contratos_3","operacao_1","operacao_2","operacao_3","financeiro_1","financeiro_2","financeiro_3","indicadores_1","indicadores_2","indicadores_3"];
+function answerText(item,answer){
+if(item.type==="choice")return item.opts[answer.idx]?.[0]||"";
+if(item.type==="slider")return `${answer.value}%`;
+if(item.type==="multi")return answer.selected.length?answer.selected.map(i=>item.opts[i]).join("; "):"Nenhum deles";
+return "";
+}
+function diagnosisPayload(){
+const r=calc(),lv=level(r.general),priority=Object.entries(r.ps).sort((a,b)=>a[1]-b[1]).slice(0,3),payload={
+origem:"site-diagnostico",nome:document.getElementById("leadName").value.trim(),sobrenome:document.getElementById("leadLast").value.trim(),
+whatsapp:document.getElementById("leadPhone").value.trim(),email:document.getElementById("leadEmail").value.trim(),condominio:document.getElementById("leadCondo").value.trim(),cidade:document.getElementById("leadCity").value.trim(),
+consentimento:document.getElementById("leadConsent").checked,papel_condominio:profileData.role,quantidade_unidades:profileData.size,tempo_operacao:profileData.age,
+nota_governanca:r.ps.gov,nota_compliance:r.ps.comp,nota_manutencao:r.ps.maint,nota_contratos:r.ps.cont,nota_operacao:r.ps.ops,nota_financeiro:r.ps.fin,nota_indicadores:r.ps.data,
+indice_geral:r.general,nivel_maturidade:lv[0],prioridade_1:pc[priority[0][0]][0],prioridade_2:pc[priority[1][0]][0],prioridade_3:pc[priority[2][0]][0]
+};
+answerFields.forEach((field,i)=>payload[field]=answerText(Q[i],answers[i]));
+return payload;
+}
+async function submitDiagnosis(){
+const response=await fetch(DIAGNOSIS_WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(diagnosisPayload()),keepalive:true});
+if(!response.ok)throw new Error(`Falha ao registrar diagnóstico (${response.status})`);
+}
 let lastResult=null;
 function renderResult(){
 const r=calc();lastResult=r;const lv=level(r.general);document.getElementById("scoreRing").style.setProperty("--score",r.general);document.getElementById("scoreValue").textContent=r.general;document.getElementById("levelMini").textContent=lv[0];document.getElementById("resultTitle").textContent=lv[0];document.getElementById("resultText").textContent=lv[1];
 document.getElementById("pillarResults").innerHTML=Object.entries(r.ps).map(([k,v])=>`<div class="pillar-row"><div class="pillar-top"><span>${pillars[k].name}</span><strong>${v}/100</strong></div><div class="bar"><div style="width:${v}%"></div></div></div>`).join("");
 const s=Object.entries(r.ps).sort((a,b)=>a[1]-b[1]).slice(0,3);document.getElementById("priorityGrid").innerHTML=s.map(([k,v],i)=>`<div class="priority"><div class="tag">#${i+1} · ${v<40?"prioridade alta":v<60?"ponto de atenção":"oportunidade"}</div><b>${pc[k][0]} — ${v}/100</b><p>${pc[k][1]}</p></div>`).join("");
 }
-document.getElementById("showResult").onclick=()=>{show("loading");setTimeout(()=>{renderResult();show("result")},1000)};
+document.getElementById("showResult").onclick=async()=>{
+const button=document.getElementById("showResult");button.disabled=true;show("loading");let saveError=false;
+try{await Promise.all([submitDiagnosis(),new Promise(resolve=>setTimeout(resolve,1000))])}catch(error){saveError=true;console.error(error)}
+renderResult();show("result");
+if(saveError)document.getElementById("shareStatus").textContent="Seu resultado foi calculado, mas não foi possível registrar os dados agora. Tente novamente mais tarde.";
+};
 
 function summaryText(){
 const r=lastResult||calc(), lv=level(r.general), name=document.getElementById("leadName").value.trim(), condo=document.getElementById("leadCondo").value.trim();
