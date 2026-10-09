@@ -453,7 +453,14 @@ answerFields.forEach((field,i)=>payload[field]=answerText(Q[i],answers[i]));
 return payload;
 }
 async function submitDiagnosis(){
-const response=await fetch(DIAGNOSIS_WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(diagnosisPayload()),keepalive:true});
+const payload=diagnosisPayload();
+try{
+const blob=await buildPdfBlob();
+payload.pdf_base64=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result).split(",")[1]||"");reader.onerror=()=>reject(reader.error);reader.readAsDataURL(blob)});
+const safeName=[payload.nome,payload.sobrenome].filter(Boolean).join("-").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-zA-Z0-9]+/g,"-").replace(/^-+|-+$/g,"").toLowerCase();
+payload.pdf_filename=`diagnostico-${safeName||"gestao-condominial"}.pdf`;
+}catch(error){console.error("Não foi possível anexar o PDF ao diagnóstico:",error)}
+const response=await fetch(DIAGNOSIS_WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
 if(!response.ok)throw new Error(`Falha ao registrar diagnóstico (${response.status})`);
 }
 let lastResult=null;
