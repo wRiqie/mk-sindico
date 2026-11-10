@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { GoogleTagManager } from "@next/third-parties/google";
 import { Manrope, Montserrat } from "next/font/google";
+import { WhatsAppButton } from "./_components/whatsapp-button";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -60,18 +60,22 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="pt-BR" data-scroll-behavior="smooth">
-      <GoogleTagManager gtmId="GTM-W9TPMPF8" />
+      <head>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtm.js?id=GTM-P4BJBVQX"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());`,
+          }}
+        />
+      </head>
       <body className={`${montserrat.variable} ${manrope.variable}`}>
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-W9TPMPF8"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-            title="Google Tag Manager"
-          />
-        </noscript>
         {children}
+        <WhatsAppButton />
       </body>
     </html>
   );

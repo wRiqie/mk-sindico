@@ -2,6 +2,7 @@ import { getBlogPosts } from "@/lib/blog-api";
 import { CalendarDays } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { WHATSAPP_URL } from "@/lib/whatsapp";
 
 export const dynamic = "force-dynamic";
 
@@ -325,7 +326,7 @@ export default async function Home() {
               patrimônio.
             </p>
             <div className="button-row">
-              <a className="button" href="https://wa.me/5511972055176">
+              <a className="button" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
                 Solicitar uma Proposta Comercial <Arrow />
               </a>
               <a className="button button-ghost" href="/diagnostico">
@@ -734,7 +735,7 @@ export default async function Home() {
           <a className="button" href="/diagnostico">
             Fazer diagnóstico da gestão
           </a>
-          <a className="button button-ghost" href="https://wa.me/5511972055176">
+          <a className="button button-ghost" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
             Conversar com a MK
           </a>
         </div>
